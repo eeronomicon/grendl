@@ -22,8 +22,8 @@
             $this->controlled = $controlled;
             $this->id = $id;
 
-            $this->setMarketValues();
-            $this->setInitialInventory();
+            //$this->setMarketValues();
+            //$this->setInitialInventory();
         }
 
         function save()
@@ -42,14 +42,24 @@
             $GLOBALS['DB']->exec("UPDATE inventory SET quantity = {$second_quantity} WHERE id_planets = {$this->id} AND id_tradegoods = {$this->regular};");
         }
 
-        function getMarketValues()
-        {
-            //return the trade goods market values as an array
-        }
-
         function buildMarket()
         {
             // when initialized, a planet builds a market
+            for ($i = 0; $i < 8; $i++) {
+                $GLOBALS['DB']->exec("INSERT INTO inventory (id_planets, id_tradegoods, quantity, price) VALUES ({$this->id}, {$i}, 0, 0);");
+            }
+        }
+
+        function getMarketValues()
+        {
+            //return the trade goods market values as an array
+            $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
+            $prices = array();
+            foreach ($returned_inventories as $inventory) {
+                $price = $inventory['price'];
+                array_push($prices, $price);
+            }
+            return $prices;
         }
 
         function setMarketValues()
@@ -57,7 +67,7 @@
             // calculate the price of a robot using the parameters
             // saves that to the Inventory Join Table
             $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
-            ]
+
             $index = 1;
             foreach($returned_inventories as $inventory) {
                 //gets the base price of the current inventory item
@@ -76,19 +86,19 @@
                 } elseif ($this->population == 2) {
                     $population_factor = 1;
                 } else {
-                    $
+                    $population_factor = rand(150, 200) / 100;
                 }
                 //sets specialty factor
                 $specialty_factor;
-                if (current inventory item is specialty item) {
-                    $specialty_factor = // assign random
+                if ($this->specialty == $inventory['id_tradegoods']) {
+                    $specialty_factor = rand(25, 50) / 100;
                 } else {
                     $specialty_factor = 1;
                 }
                 //sets controlled factor
                 $controlled_factor;
-                if ( current inventory item is the contolled item ) {
-                    $controlled_factor = // assign random
+                if ( $this->controlled == $inventory['id_tradegoods']) {
+                    $controlled_factor = rand(150, 200) / 100;
                 } else {
                     $controlled_factor = 1;
                 }
@@ -97,7 +107,7 @@
                 //push new price to the database
                 $GLOBALS['DB']->exec("UPDATE inventory SET price = {$price} WHERE id_planets = {$this->id} AND id = {$inventory['id']};");
                 //increments the index before running through loop again
-                $index++
+                $index++;
             }
         }
 

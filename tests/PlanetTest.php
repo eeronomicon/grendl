@@ -80,6 +80,26 @@
             $this->assertEquals($test_planet, $output);
         }
 
+        function test_constructor()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+
+            //Act
+            $output = $test_planet->getMarketValues();
+
+            //Assert
+            $this->assertEquals([0], $output);
+        }
+
     }
         // export PATH=$PATH:./vendor/bin first and then you will only have to run  $ phpunit tests
 ?>
