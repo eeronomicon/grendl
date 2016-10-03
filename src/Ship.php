@@ -9,11 +9,14 @@
         private $location_y;
         private $id;
 
-        function __construct($name, $id = null)
+        function __construct($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $id = null)
         {
-            $this->cargo_capacity = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE name='Cargo Capacity';");
-
             $this->name = $name;
+            $this->cargo_capacity = $cargo_capacity;
+            $this->fuel_capacity = $fuel_capacity;
+            $this->credits = $credits;
+            $this->location_x = $location_x;
+            $this->location_y = $location_y;
             $this->id = $id;
         }
 
