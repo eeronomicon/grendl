@@ -15,7 +15,7 @@
     ));
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('home.html.twig');
+        $robot_value = $planet->getRobotPrice();
     });
 
     $app->post("/result", function() use ($app) {
@@ -23,6 +23,6 @@
         $day = $newClasss->getDayOfWeek($_POST['month'], $_POST['date'], $_POST['year']);
         return $app['twig']->render('home.html.twig', array('day' => $day));
     });
-    
+
     return $app;
 ?>
