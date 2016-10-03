@@ -1,4 +1,4 @@
-# Specifications: Player/ship
+# Specifications: Player/Ship
 | Behavior | Input Example | Output Example |
 | --- | --- | --- |
 | Calculate Ship's Cargo Market Value based on Planet's characteristics | 10 units of Industrial Trade Goods (base price of 100) on a High Population Agricultural Planet | 100 x (1.5-2.0) x (1.5-2.0) x 1 x 1 |
