@@ -35,7 +35,7 @@
             $var_string = 'pop_' . $this->population . '_max_inventory';
             $returned_max_inventories = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE name = '{$var_string}';");
             $returned_max_inventories = $returned_max_inventories->fetch(PDO::FETCH_BOTH);
-            $max_inventory = (int)$returned_max_inventories['value'];
+            $max_inventory = (int)($returned_max_inventories['value'] * .8);
             $first_quantity = rand($max_inventory * .5, $max_inventory * .8);
             $second_quantity = $max_inventory - $first_quantity;
             $GLOBALS['DB']->exec("UPDATE inventory SET quantity = {$first_quantity} WHERE id_planets = {$this->id} AND id_tradegoods = {$this->specialty};");
@@ -48,8 +48,11 @@
             $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
             $quantities = array();
             foreach ($returned_inventories as $inventory) {
-                $quantity = $inventory['quantity'];
-                array_push($quantities, $quantity);
+                $quantity = (int)$inventory['quantity'];
+                $id = $inventory['id_tradegoods'];
+                $name = Planet::getTradegoodNameById($id);
+                $temp_array = array($name => $quantity);
+                $quantities = array_merge($quantities, $temp_array);
             }
             return $quantities;
         }
@@ -68,14 +71,21 @@
             $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
             $prices = array();
             foreach ($returned_inventories as $inventory) {
-                $price = $inventory['price'];
-                array_push($prices, $price);
+                $price = (int)$inventory['price'];
+                $id = $inventory['id_tradegoods'];
+                $name = Planet::getTradegoodNameById($id);
+                $temp_array = array($name => $price);
+                $prices = array_merge($prices, $temp_array);
             }
             return $prices;
         }
 
         function setMarketValues()
         {
+            // if this is a fueling station or an empty planet, nothing happens
+            if ($this->type == 0 || $this->type == 3) {
+                return;
+            }
             // calculate the price of a robot using the parameters
             // saves that to the Inventory Join Table
             $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
@@ -145,6 +155,36 @@
             }
         }
 
+        function incrementQuantities()
+        {
+            // get maximum inventory level
+            $var_string = 'pop_' . $this->population . '_max_inventory';
+            $returned_max_inventories = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE name = '{$var_string}';");
+            $returned_max_inventories = $returned_max_inventories->fetch(PDO::FETCH_BOTH);
+            $max_inventory = (int)$returned_max_inventories['value'];
+            // if maximum inventory level is already exceded, method stops here
+            $inventories = $this->getQuantities();
+            if (array_sum($inventories) >= $max_inventory) {
+                return;
+            }
+            // get inventory increment parameters
+            $returned_parameters = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE type = 'increment_percent';");
+            $inventory_increment_min_percent;
+            $inventory_increment_max_percent;
+            $increment_specialty_share;
+            $increment_regular_share;
+            foreach ($returned_parameters as $parameter) {
+                ${$parameter['name']} = $parameter['value'];
+            }
+            // set increment amounts
+            $rando = rand($inventory_increment_min_percent, $inventory_increment_max_percent);
+            $increment_amount = (int)($max_inventory * ($rando / 100));
+            $specialty_increment_amount = (int)(($increment_specialty_share / 100) * $increment_amount);
+            $regular_increment_amount = $increment_amount - $specialty_increment_amount;
+            // increment inventory values
+            $GLOBALS['DB']->exec("UPDATE inventory SET quantity = quantity + {$specialty_increment_amount} WHERE id_tradegoods = {$this->specialty} AND id_planets = {$this->id};");
+            $GLOBALS['DB']->exec("UPDATE inventory SET quantity = quantity + {$regular_increment_amount} WHERE id_tradegoods = {$this->regular} AND id_planets = {$this->id};");
+        }
 
         // static functions
         static function findById($search_id)
@@ -162,6 +202,25 @@
                 $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $id);
                 return $new_planet;
             }
+        }
+
+        static function getAllOccupiedPlanets()
+        {
+            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets WHERE type = 1 OR type = 2 OR type = 3;");
+            $planets = array();
+            foreach ($returned_planets as $planet) {
+                $x = $planet['location_x'];
+                $y = $planet['location_y'];
+                $type = $planet['type'];
+                $population = $planet['population'];
+                $specialty = $planet['specialty'];
+                $regular = $planet['regular'];
+                $controlled = $planet['controlled'];
+                $id = $planet['id'];
+                $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $id);
+                array_push($planets, $new_planet);
+            }
+            return $planets;
         }
 
         static function deleteAll()
@@ -187,6 +246,21 @@
                 array_push($planets, $new_planet);
             }
             return $planets;
+        }
+
+        static function findByCoordinates($x, $y)
+        {
+            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets WHERE location_x = {$x} AND location_y = {$y};");
+            foreach($returned_planets as $planet) {
+                return Planet::findById($planet['id']);
+            }
+        }
+
+        static function getTradegoodNameById($id)
+        {
+            $returned_name = $GLOBALS['DB']->query("SELECT name FROM tradegoods WHERE id = {$id};");
+            $name = $returned_name->fetch(PDO::FETCH_ASSOC);
+            return $name['name'];
         }
 
         // getters and setters
