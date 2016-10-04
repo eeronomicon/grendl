@@ -35,7 +35,7 @@
             $var_string = 'pop_' . $this->population . '_max_inventory';
             $returned_max_inventories = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE name = '{$var_string}';");
             $returned_max_inventories = $returned_max_inventories->fetch(PDO::FETCH_BOTH);
-            $max_inventory = (int)$returned_max_inventories['value'];
+            $max_inventory = (int)($returned_max_inventories['value'] * .8);
             $first_quantity = rand($max_inventory * .5, $max_inventory * .8);
             $second_quantity = $max_inventory - $first_quantity;
             $GLOBALS['DB']->exec("UPDATE inventory SET quantity = {$first_quantity} WHERE id_planets = {$this->id} AND id_tradegoods = {$this->specialty};");
@@ -155,6 +155,36 @@
             }
         }
 
+        function incrementQuantities()
+        {
+            // get maximum inventory level
+            $var_string = 'pop_' . $this->population . '_max_inventory';
+            $returned_max_inventories = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE name = '{$var_string}';");
+            $returned_max_inventories = $returned_max_inventories->fetch(PDO::FETCH_BOTH);
+            $max_inventory = (int)$returned_max_inventories['value'];
+            // if maximum inventory level is already exceded, method stops here
+            $inventories = $this->getQuantities();
+            if (array_sum($inventories) >= $max_inventory) {
+                return;
+            }
+            // get inventory increment parameters
+            $returned_parameters = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE type = 'increment_percent';");
+            $inventory_increment_min_percent;
+            $inventory_increment_max_percent;
+            $increment_specialty_share;
+            $increment_regular_share;
+            foreach ($returned_parameters as $parameter) {
+                ${$parameter['name']} = $parameter['value'];
+            }
+            // set increment amounts
+            $rando = rand($inventory_increment_min_percent, $inventory_increment_max_percent);
+            $increment_amount = (int)($max_inventory * ($rando / 100));
+            $specialty_increment_amount = (int)(($increment_specialty_share / 100) * $increment_amount);
+            $regular_increment_amount = $increment_amount - $specialty_increment_amount;
+            // increment inventory values
+            $GLOBALS['DB']->exec("UPDATE inventory SET quantity = quantity + {$specialty_increment_amount} WHERE id_tradegoods = {$this->specialty} AND id_planets = {$this->id};");
+            $GLOBALS['DB']->exec("UPDATE inventory SET quantity = quantity + {$regular_increment_amount} WHERE id_tradegoods = {$this->regular} AND id_planets = {$this->id};");
+        }
 
         // static functions
         static function findById($search_id)
@@ -172,6 +202,25 @@
                 $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $id);
                 return $new_planet;
             }
+        }
+
+        static function getAllOccupiedPlanets()
+        {
+            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets WHERE type = 1 OR type = 2 OR type = 3;");
+            $planets = array();
+            foreach ($returned_planets as $planet) {
+                $x = $planet['location_x'];
+                $y = $planet['location_y'];
+                $type = $planet['type'];
+                $population = $planet['population'];
+                $specialty = $planet['specialty'];
+                $regular = $planet['regular'];
+                $controlled = $planet['controlled'];
+                $id = $planet['id'];
+                $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $id);
+                array_push($planets, $new_planet);
+            }
+            return $planets;
         }
 
         static function deleteAll()

@@ -16,6 +16,7 @@
         protected function tearDown()
         {
             Planet::deleteAll();
+            // $GLOBALS['DB']->exec("DELETE FROM inventory;");
         }
 
         function test_save()
@@ -165,7 +166,7 @@
             $output = $test_planet->getQuantities();
 
             //Assert
-            $this->assertGreaterThan(14, $output['Livestock']);
+            $this->assertGreaterThan(5, $output['Livestock']);
         }
 
         function test_getTradegoodNameById()
@@ -180,25 +181,69 @@
             $this->assertEquals('Ore', $output);
         }
 
-        // function test_findByCoordinate()
-        // {
-        //     //Arrange
-        //     $x = 5;
-        //     $y = 6;
-        //     $type = 2;
-        //     $population = 1;
-        //     $specialty = 3;
-        //     $regular = 4;
-        //     $controlled = 5;
-        //     $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
-        //     $test_planet->save();
-        //
-        //     //Act
-        //     $output = Planet::findByCoordinates($x, $y);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_planet, $output);
-        // }
+        function test_findByCoordinate()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+
+            //Act
+            $output = Planet::findByCoordinates($x, $y);
+
+            //Assert
+            $this->assertEquals($test_planet, $output);
+        }
+
+        function test_getAllOccupiedPlanets()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+
+            //Act
+            $output = Planet::getAllOccupiedPlanets();
+
+            //Assert
+            $this->assertEquals([$test_planet], $output);
+        }
+
+        function test_incrementQuantities()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+            $test_planet->buildMarket();
+            $test_planet->setInitialInventory();
+            $first_output = $test_planet->getQuantities();
+
+            //Act
+            $test_planet->incrementQuantities();
+            $second_output = $test_planet->getQuantities();
+
+            //Assert
+            $this->assertGreaterThan($first_output['Livestock'], $second_output['Livestock']);
+        }
 
     }
         // export PATH=$PATH:./vendor/bin first and then you will only have to run  $ phpunit tests
