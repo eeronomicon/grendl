@@ -493,5 +493,93 @@
             $this->assertEquals($destination_status, $results);
         }
 
+        function test_nonTravel()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $destination_x = 2;
+            $destination_y = 3;
+            $destination_fuel = 30;
+            $destination_credits = 18000; // Reflects 2000 Credit deduction for Overhead Costs
+            $destination_status = array([$destination_x, $destination_y], $destination_fuel, $destination_credits);
+            // Act
+            $test_ship->travel($destination_x, $destination_y);
+            $test_ship->update();
+            $results = array($test_ship->getLocation(), $test_ship->getCurrentFuel(), $test_ship->getCredits());
+            // Assert
+            $this->assertEquals($destination_status, $results);
+        }
+
+        function test_purchaseFuelCheck1()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 500;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $fuel_price = 100;
+            $fuel_purchase_amount = 10;
+            // Act
+            $result = $test_ship->purchaseFuelCheck($fuel_purchase_amount, $fuel_price);
+            // Assert
+            $this->assertEquals(false, $result);
+        }
+
+        function test_purchaseFuelCheck2()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 5000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 40;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $fuel_price = 100;
+            $fuel_purchase_amount = 10;
+            // Act
+            $result = $test_ship->purchaseFuelCheck($fuel_purchase_amount, $fuel_price);
+            // Assert
+            $this->assertEquals(false, $result);
+        }
+
+        function test_purchaseFuel()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $fuel_price = 100;
+            $fuel_purchase_amount = 10;
+            $new_credit_balance = $credits - ($fuel_price * $fuel_purchase_amount);
+            $new_fuel_level = $current_fuel + $fuel_purchase_amount;
+            // Act
+            $test_ship->purchaseFuel($fuel_purchase_amount, $fuel_price);
+            $results = array($test_ship->getCurrentFuel(), $test_ship->getCredits());
+            // Assert
+            $this->assertEquals([$new_fuel_level, $new_credit_balance], $results);
+        }
+
     }
 ?>

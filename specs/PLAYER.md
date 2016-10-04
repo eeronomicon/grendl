@@ -4,7 +4,7 @@
 | Player can determine distance between Ship and Destination | Ship at (2,3) Destination at (4,1) | Distance is 3 (2.8 rounded up) |
 | Fuel is consumed with Player travel | User travels to a Planet that is 3 squares away | User's Fuel is reduced by 30 |
 | Player can only travel as Current Fuel allows | Ship at (2,3) Destination at (4,1) Current Fuel = 30 | Player can travel to Destination |
-| Player's Credit Balance debited per turn (Overhead and Operating Costs) | User stays put on same planet for one turn | User's Credit Balance reduced by X |
+| Player's Credit Balance debited per turn (Overhead and Operating Costs) | User stays put on same planet for one turn | User's Credit Balance reduced by 2000 |
 | User's Fuel and Credit levels affected by purchasing Fuel | User purchases 10 units of Fuel | Fuel Level increased by 10, Credit Balance reduced by xx * 10 |
 | User's maximum Fuel capacity limits how much Fuel can be purchased | User has 30 units of Fuel in a 50 unit tank | Player can only buy (pending Credit Balance) 20 units of Fuel |
 | Calculate Ship's Cargo Market Value based on Planet's characteristics | 10 units of Industrial Trade Goods (base price of 100) on a High Population Agricultural Planet | 100 x (1.5-2.0) x (1.5-2.0) x 1 x 1 |

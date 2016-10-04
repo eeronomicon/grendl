@@ -197,5 +197,27 @@
             }
         }
 
+        function purchaseFuelCheck($fuel_purchase_amount, $fuel_price)
+        {
+            $fuel_cost = $fuel_purchase_amount * $fuel_price;
+            if ($fuel_cost > $this->getCredits()) {
+                return false;
+            } elseif ($this->fuel_capacity - $this->current_fuel < $fuel_purchase_amount) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function purchaseFuel($fuel_purchase_amount, $fuel_price)
+        {
+            if ($this->purchaseFuelCheck($fuel_purchase_amount, $fuel_price)) {
+                $this->current_fuel += $fuel_purchase_amount;
+                $this->credits -= ($fuel_purchase_amount * $fuel_price);
+            }
+        }
+
+
+
     }
 ?>
