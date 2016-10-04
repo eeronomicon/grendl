@@ -16,32 +16,64 @@
     {
         protected function tearDown()
         {
-            // Planet::deleteAll();
+            Planet::deleteAll();
+            $GLOBALS['DB']->exec("DELETE FROM inventory;");
         }
 
         function test_buildAgriculturalPlanet()
         {
             // Arrange
             $test_system = new System();
+            $first_output = Planet::getAll();
 
             // Act
+            $test_system->buildAgriculturalPlanet(4, 4);
+            $second_output = Planet::getAll();
 
             // Assert
+            $this->assertGreaterThan(sizeof($first_output), sizeof($second_output));
         }
 
         function test_buildIndustrialPlanet()
         {
+            // Arrange
+            $test_system = new System();
+            $first_output = Planet::getAll();
 
+            // Act
+            $test_system->buildIndustrialPlanet(4, 4);
+            $second_output = Planet::getAll();
+
+            // Assert
+            $this->assertGreaterThan(sizeof($first_output), sizeof($second_output));
         }
 
         function test_buildEmptyPlanet()
         {
+            // Arrange
+            $test_system = new System();
+            $first_output = Planet::getAll();
 
+            // Act
+            $test_system->buildEmptyPlanet(4, 4);
+            $second_output = Planet::getAll();
+
+            // Assert
+            $this->assertGreaterThan(sizeof($first_output), sizeof($second_output));
         }
 
         function test_buildFuelingStation()
         {
+            // Arrange
+            $test_system = new System();
+            $first_output = Planet::getAll();
 
+            // Act
+            $test_system->buildFuelingStation(4, 4);
+            $second_output = Planet::getAll();
+
+            // Assert
+            $this->assertGreaterThan(sizeof($first_output), sizeof($second_output));
         }
     }
 ?>
