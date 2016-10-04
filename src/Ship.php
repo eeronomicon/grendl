@@ -217,7 +217,26 @@
             }
         }
 
+        function initializeCargo()
+        {
+            $tradegoods = TradeGood::getAll();
+            foreach ($tradegoods as $tradegood) {
+                $new_cargo = new Cargo($tradegood->getId(), $this->getId(), 0);
+                $new_cargo->save();
+            }
+        }
 
+        function getCargoManifest()
+        {
+            $return = array();
+            $all_cargo = Cargo::getAll();
+            foreach ($all_cargo as $cargo) {
+                if ($cargo->getShipId() == $this->getId()) {
+                    array_push($return, $cargo);
+                }
+            }
+            return $return;
+        }
 
     }
 ?>

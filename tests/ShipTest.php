@@ -281,7 +281,8 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
             // Act
             $result = Ship::getAll();
             // Assert
@@ -367,7 +368,8 @@
             $location_x = 1;
             $location_y = 2;
             $current_fuel = 30;
-            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship2->save();
+            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship2->save();
             // Act
             $result = Ship::find($test_ship1->getId());
             // Assert
@@ -414,7 +416,8 @@
             $location_x = 2;
             $location_y = 3;
             $current_fuel = 20;
-            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship1->save();
+            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship1->save();
             $test_ship1->setName("Grendel");
             $test_ship1->setCapacities(30, 70);
             $test_ship1->setCredits(40000);
@@ -438,7 +441,8 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
             $destination_x = 4;
             $destination_y = 1;
             $distance = 3;
@@ -459,7 +463,8 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
             $destination_x = 4;
             $destination_y = 1;
             // Act
@@ -479,7 +484,8 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
             $destination_x = 4;
             $destination_y = 1;
             $destination_fuel = 0;
@@ -579,6 +585,40 @@
             $results = array($test_ship->getCurrentFuel(), $test_ship->getCredits());
             // Assert
             $this->assertEquals([$new_fuel_level, $new_credit_balance], $results);
+        }
+
+        function test_getCargoManifest()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
+            $ship_inventory = array(
+                ["Ore", 0],
+                ["Grain", 0],
+                ["Livestock", 0],
+                ["Consumables", 0],
+                ["Consumer Goods", 0],
+                ["Heavy Machinery", 0],
+                ["Military Hardware", 0],
+                ["Robots", 0]
+            );
+            // Act
+            $test_ship->initializeCargo();
+            $manifest = $test_ship->getCargoManifest();
+            $result = array();
+            foreach ($manifest as $cargo) {
+                array_push($result, [TradeGood::find($cargo->getTradeGoodsId())->getName(), $cargo->getQuantity()]);
+            }
+            // Assert
+            $this->assertEquals($ship_inventory, $result);
         }
 
     }
