@@ -168,5 +168,22 @@
             $GLOBALS['DB']->exec("DELETE FROM cargo WHERE ship_id = {$this->getId()};");
         }
 
+        function getDistance($destination_x, $destination_y)
+        {
+            $delta_x = abs($destination_x - $this->getLocation()[0]);
+            $delta_y = abs($destination_y - $this->getLocation()[1]);
+            return ceil(sqrt(pow($delta_x, 2) + pow($delta_y, 2)));
+        }
+
+        function checkTravelRange($destination_x, $destination_y)
+        {
+            $distance = $this->getDistance($destination_x, $destination_y);
+            if ($distance * 10 <= $this->getCurrentFuel()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 ?>

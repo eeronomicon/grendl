@@ -6,6 +6,8 @@
     */
 
     require_once "src/Ship.php";
+    require_once "src/Cargo.php";
+    require_once "src/TradeGood.php";
 
     $server = 'mysql:host=localhost;dbname=space_truckin_test';
     $username = 'root';
@@ -17,6 +19,7 @@
         protected function tearDown()
         {
             Ship::deleteAll();
+            Cargo::deleteAll();
         }
 
         function test_getId()
@@ -422,6 +425,45 @@
             $result = Ship::getAll();
             // Assert
             $this->assertEquals([$test_ship1], $result);
+        }
+
+        function test_getDistance()
+        {
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $destination_x = 4;
+            $destination_y = 1;
+            $distance = 3;
+            // Act
+            $result = $test_ship->getDistance($destination_x, $destination_y);
+            // Assert
+            $this->assertEquals($distance, $result);
+        }
+
+        function test_checkTravelRange()
+        {
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $destination_x = 4;
+            $destination_y = 1;
+            // Act
+            $result = $test_ship->checkTravelRange($destination_x, $destination_y);
+            // Assert
+            $this->assertEquals(true, $result);
         }
 
     }
