@@ -186,6 +186,24 @@
             $GLOBALS['DB']->exec("UPDATE inventory SET quantity = quantity + {$regular_increment_amount} WHERE id_tradegoods = {$this->regular} AND id_planets = {$this->id};");
         }
 
+        function quantityCheck($resource_name, $quantity)
+        {
+            $quantities = $this->getQuantities();
+            if($quantities[$resource_name] >= $quantity) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function removeInventory($resource_name, $quantity)
+        {
+            $returned_names = $GLOBALS['DB']->query("SELECT id FROM tradegoods WHERE name = '{$resource_name}';");
+            $tradegood_id = $returned_names->fetch(PDO::FETCH_ASSOC);
+            $tradegood_id = $tradegood_id['id'];
+            $GLOBALS['DB']->exec("UPDATE inventory SET quantity = quantity - {$quantity} WHERE id_planets = {$this->id} AND id_tradegoods = {$tradegood_id};");
+        }
+
         // static functions
         static function findById($search_id)
         {
@@ -206,7 +224,7 @@
 
         static function getAllOccupiedPlanets()
         {
-            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets WHERE type = 1 OR type = 2 OR type = 3;");
+            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets WHERE type = 1 OR type = 2;");
             $planets = array();
             foreach ($returned_planets as $planet) {
                 $x = $planet['location_x'];
