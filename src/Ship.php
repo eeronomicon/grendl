@@ -277,12 +277,29 @@
 
         function cargoCheck($new_cargo_quantity)
         {
-            if (($this->getCargoCapacity() * $this->getCargoLoad()) > $new_cargo_quantity) {
+            if (($this->getCargoCapacity() - $this->getCargoLoad()) > $new_cargo_quantity) {
                 return false;
             } else {
                 return true;
             }
         }
 
+        function buyTradeGood($cargo_type, $purchase_quantity, $unit_price)
+        {
+            if ($this->cargoCheck($purchase_quantity) && $this->creditCheck($unit_price, $purchase_quantity)) {
+                $cargo = $this->findCargo($cargo_type);
+                $cargo->update($cargo->getQuantity() + $purchase_quantity);
+                $this->credits -= $unit_price * $purchase_quantity;
+            }
+        }
+
+        function sellTradeGood($cargo_type, $sale_quantity, $unit_price)
+        {
+            $cargo = $this->findCargo($cargo_type);
+            if ($sale_quantity <= $cargo->getQuantity()) {
+                $cargo->update($cargo->getQuantity() - $sale_quantity);
+                $this->credits += $unit_price * $sale_quantity;
+            }
+        }
     }
 ?>
