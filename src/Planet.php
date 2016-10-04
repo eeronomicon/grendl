@@ -32,11 +32,26 @@
         function setInitialInventory()
         {
             // sets initial inventory and saves initial Market Values to the join table
-            $first_percentage = rand(6, 10);
-            $first_quantity = $first_percentage * 10;
-            $second_quantity = 100 - $first_quantity;
+            $var_string = 'pop_' . $this->population . '_max_inventory';
+            $returned_max_inventories = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE name = '{$var_string}';");
+            $returned_max_inventories = $returned_max_inventories->fetch(PDO::FETCH_BOTH);
+            $max_inventory = (int)$returned_max_inventories['value'];
+            $first_quantity = rand($max_inventory * .5, $max_inventory * .8);
+            $second_quantity = $max_inventory - $first_quantity;
             $GLOBALS['DB']->exec("UPDATE inventory SET quantity = {$first_quantity} WHERE id_planets = {$this->id} AND id_tradegoods = {$this->specialty};");
             $GLOBALS['DB']->exec("UPDATE inventory SET quantity = {$second_quantity} WHERE id_planets = {$this->id} AND id_tradegoods = {$this->regular};");
+        }
+
+        function getQuantities()
+        {
+            // returns the inventory as an array of eight values
+            $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
+            $quantities = array();
+            foreach ($returned_inventories as $inventory) {
+                $quantity = $inventory['quantity'];
+                array_push($quantities, $quantity);
+            }
+            return $quantities;
         }
 
         function buildMarket()
@@ -67,36 +82,57 @@
             $returned_base_prices = $GLOBALS['DB']->query("SELECT price FROM tradegoods;");
             $returned_base_prices = $returned_base_prices->fetchAll(PDO::FETCH_ASSOC);
             $index = 1;
+            // pulls factor mins and maxes from the parameters table
+            $returned_factors = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE type = 'type_factor' OR type = 'pop_factor' OR type = 'specialty_factor' OR type = 'controlled_factor';");
+            $type_match_min_factor;
+            $type_match_max_factor;
+            $type_mismatch_min_factor;
+            $type_mismatch_max_factor;
+            $pop_1_min_factor;
+            $pop_1_max_factor;
+            $pop_2_min_factor;
+            $pop_2_max_factor;
+            $pop_3_min_factor;
+            $pop_3_max_factor;
+            $specialty_min_factor;
+            $specialty_max_factor;
+            $controlled_min_factor;
+            $controlled_max_factor;
+            foreach($returned_factors as $factor) {
+                $name = $factor['name'];
+                ${$name} = $factor['value'];
+            }
+            // runs through inventories and sets prices
             foreach($returned_inventories as $inventory) {
                 //gets the base price of the current inventory item
                 $base_price = (int)$returned_base_prices[$index - 1]['price'];
                 //sets the planet type factor to later calculate item market value
                 $planet_type_factor;
                 if ($this->type == 1 and $index < 5) {
-                    $planet_type_factor = rand(25, 50) / 100;
+                    $planet_type_factor = rand($type_match_min_factor, $type_match_max_factor) / 100;
                 } else {
-                    $planet_type_factor = rand(150, 200) / 100;
+                    $planet_type_factor = rand($type_mismatch_min_factor, $type_mismatch_max_factor) / 100;
                 }
                 //sets population factor
                 $population_factor; // pull from the database , assign random
                 if ($this->population == 1) {
-                    $population_factor = rand(50, 75) / 100;
+                    $population_factor = rand($pop_1_min_factor, $pop_1_max_factor) / 100;
                 } elseif ($this->population == 2) {
-                    $population_factor = 1;
+                    $population_factor = rand($pop_2_min_factor, $pop_2_max_factor) / 100;
                 } else {
-                    $population_factor = rand(150, 200) / 100;
+                    $population_factor = rand($pop_3_min_factor, $pop_3_max_factor) / 100;
                 }
                 //sets specialty factor
                 $specialty_factor;
                 if ($this->specialty == $inventory['id_tradegoods']) {
-                    $specialty_factor = rand(25, 50) / 100;
+                    $specialty_factor = rand($specialty_min_factor, $specialty_max_factor) / 100;
                 } else {
                     $specialty_factor = 1;
                 }
                 //sets controlled factor
                 $controlled_factor;
                 if ( $this->controlled == $inventory['id_tradegoods']) {
-                    $controlled_factor = rand(150, 200) / 100;
+                    $controlled_factor = rand($controlled_min_factor, $controlled_max_factor) / 100;
                 } else {
                     $controlled_factor = 1;
                 }

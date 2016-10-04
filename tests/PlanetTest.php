@@ -80,11 +80,6 @@
             $this->assertEquals($test_planet, $output);
         }
 
-        // $this->buildMarket();
-        // $this->setMarketValues();
-        //$this->setInitialInventory();
-
-
         function test_buildMarket()
         {
             //Arrange
@@ -125,7 +120,52 @@
             $output = $test_planet->getMarketValues();
 
             //Assert
-            $this->assertEquals([], $output);
+            $this->assertGreaterThan(10, $output[4]);
+        }
+
+        function test_getMarketValues()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+            $test_planet->buildMarket();
+            $test_planet->setMarketValues();
+
+            //Act
+            $output = $test_planet->getMarketValues();
+
+            //Assert
+            $this->assertEquals(8, sizeof($output));
+        }
+
+        function test_setInitialQuantities()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+            $test_planet->buildMarket();
+            $test_planet->setMarketValues();
+
+            //Act
+            $test_planet->setInitialInventory();
+            $output = $test_planet->getQuantities();
+
+            //Assert
+            $this->assertGreaterThan(14, $output[2]);
         }
 
     }

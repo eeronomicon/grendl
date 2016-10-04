@@ -4,6 +4,8 @@
         function __construct()
         {
             // deletes everything from planets table
+            $GLOBALS['DB']->exec("DELETE FROM planets;");
+            $GLOBALS['DB']->exec("DELETE FROM inventory;");
             // get the appropriate number of random numbers from 1-100
             // assign all numbers that aren't on the grid blank planets
             // get the appropriate number of ag planets
