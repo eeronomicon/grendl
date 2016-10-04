@@ -14,8 +14,8 @@
 | Player can only purchase within current Credit amount | Player tries to buy 100 units of Robots (at 1000 Credits each), and Player has 2000000 Credits | Credit Check returns "true" |
 | Player can get a total of Cargo quantity on Ship | Ship has 20 Units of Robots and 10 Units of Grain | Returns 30 Units |
 | Player cannot exceed Ship's Cargo Capacity when adding Cargo | Ship has 50 Units of Cargo Capacity, of which 40 Units are in use. Player tries to buy 10 Units of Robots | Cargo Check returns "true" |
-| Calculate Ship's Cargo Market Value based on Planet's characteristics | 10 units of Industrial Trade Goods (base price of 100) on a High Population Agricultural Planet | 100 x (1.5-2.0) x (1.5-2.0) x 1 x 1 |
-| User sells X units of Trade Good | User sells 10 units of Robots | User's Credit Balance goes up by above formula x 10 |
+| Player can purchase Trade Goods and add them as Ship's Cargo | Player buys 10 Units of Robots at 1000 Credits | Ship adds 10 Units of Robots as Cargo and its Credit Balance is reduced by 10000 |
+| Player can sell Cargo | Player sells 10 Units of Robots at 1000 Credits | Player's Cargo Quantity is reduced by 10 Units, and Credit Balance is increased by 10000 |
 | User can only buy the quantity available on a Planet | Industrial Planet has 20 units of Machinery | Player can only buy (pending sufficient Credit and Cargo Capacity) up to 20 units |
 | Game ends when Player is out of Credits | Player has no Cargo nor Credits | Cue end game music |
 | Game ends when Player is out of Fuel and is unable to purchase more | Player is stranded mid-space or a Fuel-less Planet | Cue end game music |

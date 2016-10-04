@@ -725,37 +725,5 @@
             $this->assertEquals($total_cargo, $result);
         }
 
-        function test_cargoCheck()
-        {
-            // Arrange
-            $name = "Beowulf";
-            $cargo_capacity = 60;
-            $fuel_capacity = 40;
-            $credits = 20000;
-            $location_x = 2;
-            $location_y = 3;
-            $current_fuel = 30;
-            $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
-            $test_ship->save();
-            $test_ship->initializeCargo();
-            $ship_inventory = array(
-                ["Ore", 10],
-                ["Grain", 0],
-                ["Livestock", 10],
-                ["Consumables", 0],
-                ["Consumer Goods", 10],
-                ["Heavy Machinery", 10],
-                ["Military Hardware", 10],
-                ["Robots", 0]
-            );
-            $new_cargo_type = "Livestock";
-            $new_cargo_quantity = 10;
-            // Act
-            $result = $test_ship->cargoCheck($new_cargo_quantity);
-            // Assert
-            $this->assertEquals(true, $result);
-        }
-
     }
 ?>
