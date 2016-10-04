@@ -122,12 +122,13 @@
             $new_empty_planet = new Planet($x, $y, $type, 0, 0, 0, 0);
             $new_empty_planet->save();
         }
-
-        function nextTurn()
+    // static functions
+        static function nextTurn()
         {
             $occupied_planets = Planet::getAllOccupiedPlanets();
             foreach($occupied_planets as $planet) {
                 $planet->incrementQuantities();
+                $planet->setMarketValues();
             }
         }
 

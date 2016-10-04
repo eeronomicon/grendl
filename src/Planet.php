@@ -204,6 +204,18 @@
             $GLOBALS['DB']->exec("UPDATE inventory SET quantity = quantity - {$quantity} WHERE id_planets = {$this->id} AND id_tradegoods = {$tradegood_id};");
         }
 
+        // temp function, just to display info
+        function getInventoryInfo()
+        {
+            $values = $this->getMarketValues();
+            $quantities = $this->getQuantities();
+            $string = "";
+            foreach ($values as $key => $value) {
+                $string .= $value . " / ";
+            }
+            return $string;
+        }
+
         // static functions
         static function findById($search_id)
         {

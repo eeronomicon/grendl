@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <form action='/reset' method='post'>
+            <button type='submit'>Reset Planets</button>
+        </form>
+        <form action='/nextTurn' method='post'>
+            <button type='submit'>Next Turn</button>
+        </form>
+        <ul>
+            {% for planet in planets %}
+                <li>
+                    Planet Id: {{ planet.getId }}
+                    <br>
+                    Coordinates: {{ planet.getX }}, {{ planet.getY }}
+                    <br>
+                    {{ planet.getInventoryInfo }}
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

@@ -1,10 +1,16 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/DayOfWeek.php";
+    require_once __DIR__."/../src/Planet.php";
+    require_once __DIR__.'/../src/System.php';
     date_default_timezone_set('America/Los_Angeles');
 
     use Symfony\Component\Debug\Debug;
     Debug::enable();
+
+    $server = 'mysql:host=localhost;dbname=space_truckin';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
 
     $app = new Silex\Application();
 
@@ -15,13 +21,17 @@
     ));
 
     $app->get("/", function() use ($app) {
-        $robot_value = $planet->getRobotPrice();
+        return $app['twig']->render('planet_display.html.twig', array('planets' => Planet::getAllOccupiedPlanets()));
     });
 
-    $app->post("/result", function() use ($app) {
-        $newClasss = new Classs;
-        $day = $newClasss->getDayOfWeek($_POST['month'], $_POST['date'], $_POST['year']);
-        return $app['twig']->render('home.html.twig', array('day' => $day));
+    $app->post("/reset", function() use ($app) {
+        new System();
+        return $app->redirect('/');
+    });
+
+    $app->post('/nextTurn', function() use ($app) {
+        System::nextTurn();
+        return $app->redirect('/');
     });
 
     return $app;
