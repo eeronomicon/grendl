@@ -98,7 +98,7 @@
             $output = $test_planet->getMarketValues();
 
             //Assert
-            $this->assertEquals([0, 0, 0, 0, 0, 0, 0, 0], $output);
+            $this->assertEquals(0, $output['Ore']);
         }
 
         function test_setMarketValues()
@@ -120,7 +120,7 @@
             $output = $test_planet->getMarketValues();
 
             //Assert
-            $this->assertGreaterThan(10, $output[4]);
+            $this->assertGreaterThan(10, $output['Consumer Goods']);
         }
 
         function test_getMarketValues()
@@ -165,8 +165,40 @@
             $output = $test_planet->getQuantities();
 
             //Assert
-            $this->assertGreaterThan(14, $output[2]);
+            $this->assertGreaterThan(14, $output['Livestock']);
         }
+
+        function test_getTradegoodNameById()
+        {
+            //Arrange
+            $tradegood_id = 1;
+
+            //Act
+            $output = Planet::getTradegoodNameById($tradegood_id);
+
+            //Assert
+            $this->assertEquals('Ore', $output);
+        }
+
+        // function test_findByCoordinate()
+        // {
+        //     //Arrange
+        //     $x = 5;
+        //     $y = 6;
+        //     $type = 2;
+        //     $population = 1;
+        //     $specialty = 3;
+        //     $regular = 4;
+        //     $controlled = 5;
+        //     $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+        //     $test_planet->save();
+        //
+        //     //Act
+        //     $output = Planet::findByCoordinates($x, $y);
+        //
+        //     //Assert
+        //     $this->assertEquals($test_planet, $output);
+        // }
 
     }
         // export PATH=$PATH:./vendor/bin first and then you will only have to run  $ phpunit tests

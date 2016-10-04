@@ -48,8 +48,11 @@
             $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
             $quantities = array();
             foreach ($returned_inventories as $inventory) {
-                $quantity = $inventory['quantity'];
-                array_push($quantities, $quantity);
+                $quantity = (int)$inventory['quantity'];
+                $id = $inventory['id_tradegoods'];
+                $name = Planet::getTradegoodNameById($id);
+                $temp_array = array($name => $quantity);
+                $quantities = array_merge($quantities, $temp_array);
             }
             return $quantities;
         }
@@ -68,14 +71,21 @@
             $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
             $prices = array();
             foreach ($returned_inventories as $inventory) {
-                $price = $inventory['price'];
-                array_push($prices, $price);
+                $price = (int)$inventory['price'];
+                $id = $inventory['id_tradegoods'];
+                $name = Planet::getTradegoodNameById($id);
+                $temp_array = array($name => $price);
+                $prices = array_merge($prices, $temp_array);
             }
             return $prices;
         }
 
         function setMarketValues()
         {
+            // if this is a fueling station or an empty planet, nothing happens
+            if ($this->type == 0 || $this->type == 3) {
+                return;
+            }
             // calculate the price of a robot using the parameters
             // saves that to the Inventory Join Table
             $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
@@ -187,6 +197,21 @@
                 array_push($planets, $new_planet);
             }
             return $planets;
+        }
+
+        static function findByCoordinates($x, $y)
+        {
+            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets WHERE location_x = {$x} AND location_y = {$y};");
+            foreach($returned_planets as $planet) {
+                return Planet::findById($planet['id']);
+            }
+        }
+
+        static function getTradegoodNameById($id)
+        {
+            $returned_name = $GLOBALS['DB']->query("SELECT name FROM tradegoods WHERE id = {$id};");
+            $name = $returned_name->fetch(PDO::FETCH_ASSOC);
+            return $name['name'];
         }
 
         // getters and setters

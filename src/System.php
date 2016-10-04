@@ -110,11 +110,17 @@
         function buildFuelingStation($x, $y)
         {
             // creates a fueling station
+            $type = 3;
+            $new_fuel_planet = new Planet($x, $y, $type, 0, 0, 0, 0);
+            $new_fuel_planet->save();
         }
 
         function buildEmptyPlanet($x, $y)
         {
             // creates an empty planet
+            $type = 0;
+            $new_empty_planet = new Planet($x, $y, $type, 0, 0, 0, 0);
+            $new_empty_planet->save();
         }
 
     }
