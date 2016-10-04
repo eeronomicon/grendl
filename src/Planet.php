@@ -21,9 +21,6 @@
             $this->regular = $regular;
             $this->controlled = $controlled;
             $this->id = $id;
-
-            //$this->setMarketValues();
-            //$this->setInitialInventory();
         }
 
         function save()
@@ -45,7 +42,7 @@
         function buildMarket()
         {
             // when initialized, a planet builds a market
-            for ($i = 0; $i < 8; $i++) {
+            for ($i = 1; $i < 9; $i++) {
                 $GLOBALS['DB']->exec("INSERT INTO inventory (id_planets, id_tradegoods, quantity, price) VALUES ({$this->id}, {$i}, 0, 0);");
             }
         }
@@ -67,11 +64,12 @@
             // calculate the price of a robot using the parameters
             // saves that to the Inventory Join Table
             $returned_inventories = $GLOBALS['DB']->query("SELECT * FROM inventory WHERE id_planets = {$this->id};");
-
+            $returned_base_prices = $GLOBALS['DB']->query("SELECT price FROM tradegoods;");
+            $returned_base_prices = $returned_base_prices->fetchAll(PDO::FETCH_ASSOC);
             $index = 1;
             foreach($returned_inventories as $inventory) {
                 //gets the base price of the current inventory item
-                $base_price = $inventory['price'];
+                $base_price = (int)$returned_base_prices[$index - 1]['price'];
                 //sets the planet type factor to later calculate item market value
                 $planet_type_factor;
                 if ($this->type == 1 and $index < 5) {

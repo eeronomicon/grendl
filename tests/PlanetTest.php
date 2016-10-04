@@ -80,7 +80,12 @@
             $this->assertEquals($test_planet, $output);
         }
 
-        function test_constructor()
+        // $this->buildMarket();
+        // $this->setMarketValues();
+        //$this->setInitialInventory();
+
+
+        function test_buildMarket()
         {
             //Arrange
             $x = 5;
@@ -94,10 +99,33 @@
             $test_planet->save();
 
             //Act
+            $test_planet->buildMarket();
             $output = $test_planet->getMarketValues();
 
             //Assert
-            $this->assertEquals([0], $output);
+            $this->assertEquals([0, 0, 0, 0, 0, 0, 0, 0], $output);
+        }
+
+        function test_setMarketValues()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+            $test_planet->buildMarket();
+
+            //Act
+            $test_planet->setMarketValues();
+            $output = $test_planet->getMarketValues();
+
+            //Assert
+            $this->assertEquals([], $output);
         }
 
     }
