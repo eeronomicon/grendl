@@ -185,5 +185,17 @@
             }
         }
 
+        function travel($destination_x, $destination_y)
+        {
+            if ($this->checkTravelRange($destination_x, $destination_y)) {
+                $distance = $this->getDistance($destination_x, $destination_y);
+                $this->setLocation($destination_x, $destination_y);
+                $this->current_fuel -= $distance * 10;
+                $this->credits -= 2000;
+            } else {
+                return;
+            }
+        }
+
     }
 ?>

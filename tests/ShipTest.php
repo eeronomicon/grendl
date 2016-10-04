@@ -429,6 +429,7 @@
 
         function test_getDistance()
         {
+            // Arrange
             $name = "Beowulf";
             $cargo_capacity = 60;
             $fuel_capacity = 40;
@@ -449,6 +450,7 @@
 
         function test_checkTravelRange()
         {
+            // Arrange
             $name = "Beowulf";
             $cargo_capacity = 60;
             $fuel_capacity = 40;
@@ -464,6 +466,31 @@
             $result = $test_ship->checkTravelRange($destination_x, $destination_y);
             // Assert
             $this->assertEquals(true, $result);
+        }
+
+        function test_travel()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $destination_x = 4;
+            $destination_y = 1;
+            $destination_fuel = 0;
+            $destination_credits = 18000; // Reflects 2000 Credit deduction for Overhead Costs
+            $destination_status = array([$destination_x, $destination_y], $destination_fuel, $destination_credits);
+            // Act
+            $test_ship->travel($destination_x, $destination_y);
+            $test_ship->update();
+            $results = array($test_ship->getLocation(), $test_ship->getCurrentFuel(), $test_ship->getCredits());
+            // Assert
+            $this->assertEquals($destination_status, $results);
         }
 
     }
