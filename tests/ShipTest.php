@@ -621,5 +621,141 @@
             $this->assertEquals($ship_inventory, $result);
         }
 
+        function test_creditCheck()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 2000000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
+            $tradegood = "Robots";
+            $unit_price = 1000;
+            $purchase_quantity = 100;
+            // Act
+            $result = $test_ship->creditCheck($unit_price, $purchase_quantity);
+            // Assert
+            $this->assertEquals(true, $result);
+        }
+
+        function test_getCargo()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
+            $test_ship->initializeCargo();
+            $cargo_type = "Robots";
+            // Act
+            $cargo = $test_ship->findCargo($cargo_type);
+            $result = $cargo->getQuantity();
+            // Assert
+            $this->assertEquals(0, $result);
+        }
+
+        function test_addCargo()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
+            $test_ship->initializeCargo();
+            $cargo_type = "Robots";
+            $cargo_quantity = 10;
+            // Act
+            $test_ship->addCargo($cargo_type, $cargo_quantity);
+            $cargo = $test_ship->findCargo($cargo_type);
+            $result = $cargo->getQuantity();
+            // Assert
+            $this->assertEquals($cargo_quantity, $result);
+        }
+
+        function test_getCargoLoad()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
+            $test_ship->initializeCargo();
+            $ship_inventory = array(
+                ["Ore", 10],
+                ["Grain", 0],
+                ["Livestock", 10],
+                ["Consumables", 0],
+                ["Consumer Goods", 10],
+                ["Heavy Machinery", 10],
+                ["Military Hardware", 10],
+                ["Robots", 0]
+            );
+            $total_cargo = 0;
+            foreach ($ship_inventory as $line_item) {
+                $cargo = $test_ship->findCargo($line_item[0]);
+                $cargo->update($line_item[1]);
+                $total_cargo += $line_item[1];
+            }
+            // Act
+            $result = $test_ship->getCargoLoad();
+            // Assert
+            $this->assertEquals($total_cargo, $result);
+        }
+
+        function test_cargoCheck()
+        {
+            // Arrange
+            $name = "Beowulf";
+            $cargo_capacity = 60;
+            $fuel_capacity = 40;
+            $credits = 20000;
+            $location_x = 2;
+            $location_y = 3;
+            $current_fuel = 30;
+            $id = 1;
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship->save();
+            $test_ship->initializeCargo();
+            $ship_inventory = array(
+                ["Ore", 10],
+                ["Grain", 0],
+                ["Livestock", 10],
+                ["Consumables", 0],
+                ["Consumer Goods", 10],
+                ["Heavy Machinery", 10],
+                ["Military Hardware", 10],
+                ["Robots", 0]
+            );
+            $new_cargo_type = "Livestock";
+            $new_cargo_quantity = 10;
+            // Act
+            $result = $test_ship->cargoCheck($new_cargo_quantity);
+            // Assert
+            $this->assertEquals(true, $result);
+        }
+
     }
 ?>

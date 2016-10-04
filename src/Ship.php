@@ -238,5 +238,51 @@
             return $return;
         }
 
+        function creditCheck($unit_price, $purchase_quantity)
+        {
+            if (($unit_price * $purchase_quantity) > $this->getCredits()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function findCargo($cargo_type)
+        {
+            $found_cargo = null;
+            $manifest = $this->getCargoManifest();
+            foreach ($manifest as $cargo) {
+                if (TradeGood::find($cargo->getTradeGoodsId())->getName() == $cargo_type) {
+                    $found_cargo = $cargo;
+                }
+            }
+            return $found_cargo;
+        }
+
+        function addCargo($cargo_type, $cargo_quantity)
+        {
+            $cargo = $this->findCargo($cargo_type);
+            $cargo->update($cargo->getQuantity() + $cargo_quantity);
+        }
+
+        function getCargoLoad()
+        {
+            $current_load = 0;
+            $manifest = $this->getCargoManifest();
+            foreach ($manifest as $cargo) {
+                $current_load += $cargo->getQuantity();
+            }
+            return $current_load;
+        }
+
+        function cargoCheck($new_cargo_quantity)
+        {
+            if (($this->getCargoCapacity() * $this->getCargoLoad()) > $new_cargo_quantity) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
     }
 ?>
