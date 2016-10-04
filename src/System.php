@@ -123,5 +123,13 @@
             $new_empty_planet->save();
         }
 
+        function nextTurn()
+        {
+            $occupied_planets = Planet::getAllOccupiedPlanets();
+            foreach($occupied_planets as $planet) {
+                $planet->incrementQuantities();
+            }
+        }
+
     }
  ?>

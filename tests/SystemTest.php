@@ -75,5 +75,21 @@
             // Assert
             $this->assertGreaterThan(sizeof($first_output), sizeof($second_output));
         }
+
+        function test_nextTurn()
+        {
+            // Arrange
+            $test_system = new System();
+            $planets = Planet::getAllOccupiedPlanets();
+            $first_output = $planets[0]->getQuantities();
+
+            // Act
+            $test_system->nextTurn();
+            $planets = Planet::getAllOccupiedPlanets();
+            $second_output = $planets[0]->getQuantities();
+
+            // Assert
+            $this->assertGreaterThan($first_output, $second_output);
+        }
     }
 ?>

@@ -224,7 +224,7 @@
 
         static function getAllOccupiedPlanets()
         {
-            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets WHERE type = 1 OR type = 2 OR type = 3;");
+            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets WHERE type = 1 OR type = 2;");
             $planets = array();
             foreach ($returned_planets as $planet) {
                 $x = $planet['location_x'];
