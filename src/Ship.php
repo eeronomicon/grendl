@@ -7,9 +7,10 @@
         private $credits;
         private $location_x;
         private $location_y;
+        private $current_fuel;
         private $id;
 
-        function __construct($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $id = null)
+        function __construct($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id = null)
         {
             $this->name = $name;
             $this->cargo_capacity = $cargo_capacity;
@@ -17,12 +18,8 @@
             $this->credits = $credits;
             $this->location_x = $location_x;
             $this->location_y = $location_y;
+            $this->current_fuel = $current_fuel;
             $this->id = $id;
-        }
-
-        function getName()
-        {
-            return $this->name;
         }
 
         function getId()
@@ -30,9 +27,34 @@
             return $this->id;
         }
 
-        function setName($new_name)
+        function getName()
         {
-            $this->name = (string) $new_name;
+            return $this->name;
+        }
+
+        function getCargoCapacity()
+        {
+            return $this->cargo_capacity;
+        }
+
+        function getFuelCapacity()
+        {
+            return $this->fuel_capacity;
+        }
+
+        function getCredits()
+        {
+            return $this->credits;
+        }
+
+        function getLocation()
+        {
+            return array($this->location_x, $this->location_y);
+        }
+
+        function getCurrentFuel()
+        {
+            return $this->current_fuel;
         }
 
         function setId($new_id)
@@ -40,20 +62,69 @@
             $this->id = (int) $new_id;
         }
 
+        function setCapacities($new_cargo, $new_fuel)
+        {
+            $this->cargo_capacity = (int) $new_cargo;
+            $this->fuel_capacity = (int) $new_fuel;
+        }
+
+        function setName($new_name)
+        {
+            $this->name = (string) $new_name;
+        }
+
+        function setCredits($new_credits)
+        {
+            $this->credits = (int) $new_credits;
+        }
+
+        function setLocation($new_x, $new_y)
+        {
+            $this->location_x = (int) $new_x;
+            $this->location_y = (int) $new_y;
+        }
+
+        function setCurrentFuel($new_fuel)
+        {
+            $this->current_fuel = (int) $new_fuel;
+        }
+
         function save()
         {
-          $GLOBALS['DB']->exec("INSERT INTO ships (name) VALUES ('{$this->getName()}')");
+          $GLOBALS['DB']->exec("INSERT INTO ship (
+            name,
+            cargo_capacity,
+            fuel_capacity,
+            credits,
+            location_x,
+            location_y,
+            current_fuel
+          ) VALUES (
+            '{$this->getName()}',
+            {$this->getCargoCapacity()},
+            {$this->getFuelCapacity()},
+            {$this->getCredits()},
+            {$this->getLocation()[0]},
+            {$this->getLocation()[1]},
+            {$this->getCurrentFuel()}
+          );");
           $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
         {
-            $returned_ship = $GLOBALS['DB']->query("SELECT * FROM ships ORDER BY name;");
+            $returned_ships = $GLOBALS['DB']->query("SELECT * FROM ship;");
             $ships = array();
-            foreach($returned_ship as $ship) {
-                $name = $ship['name'];
+            foreach($returned_ships as $ship) {
                 $id = $ship['id'];
-                $new_ship = new Ship($name, $id);
+                $name = $ship['name'];
+                $cargo_capacity = $ship['cargo_capacity'];
+                $fuel_capacity = $ship['fuel_capacity'];
+                $credits = $ship['credits'];
+                $location_x = $ship['location_x'];
+                $location_y = $ship['location_y'];
+                $current_fuel = $ship['current_fuel'];
+                $new_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
                 array_push($ships, $new_ship);
             }
             return $ships;
@@ -61,7 +132,7 @@
 
         static function deleteAll()
         {
-            $GLOBALS['DB']->exec("DELETE FROM ships;");
+            $GLOBALS['DB']->exec("DELETE FROM ship;");
             $GLOBALS['DB']->exec("DELETE FROM cargo;");
         }
 
@@ -78,15 +149,22 @@
             return $found_ship;
         }
 
-        function update($new_name)
+        function update()
         {
-            $GLOBALS['DB']->exec("UPDATE ships SET name = '{$new_name}' WHERE id = {$this->getId()};");
-            $this->setName($new_name);
+            $GLOBALS['DB']->exec("UPDATE ship SET
+            name = '{$this->getName()}',
+            cargo_capacity = {$this->getCargoCapacity()},
+            fuel_capacity = {$this->getFuelCapacity()},
+            credits = {$this->getCredits()},
+            location_x = {$this->getLocation()[0]},
+            location_y = {$this->getLocation()[1]},
+            current_fuel = {$this->getCurrentFuel()}
+            WHERE id = {$this->getId()};");
         }
 
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM ships WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM ship WHERE id = {$this->getId()};");
             $GLOBALS['DB']->exec("DELETE FROM cargo WHERE ship_id = {$this->getId()};");
         }
 
