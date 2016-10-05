@@ -19,6 +19,9 @@
                 <div class="col-xs-2">
                     <h5>Fuel Level</h5>
                 </div>
+                <div class="col-xs-1">
+                    <h5>Credits</h5>
+                </div>
                 <div class="col-xs-2">
                     <h5>Go/No-Go:</h5>
                 </div>
@@ -26,13 +29,16 @@
             <div class="row">
                 <div class="col-xs-1"></div>
                 <div class="col-xs-1">
-                    <h4>{{ ship.getLocation[1] }} , {{ ship.getlocation[0] }}</h4>
+                    <h5>{{ ship.getLocation[1] }} , {{ ship.getlocation[0] }}</h5>
                 </div>
                 <div class="col-xs-5">
-                    <h4><span id="destination_name">&nbsp;</span> <span id="destination_coordinates"></span></h4>
+                    <h5><span id="destination_name">&nbsp;</span> <span id="destination_coordinates"></span></h5>
                 </div>
                 <div class="col-xs-2">
-                    <h4>{{ ship.getCurrentFuel }} / {{ ship.getFuelCapacity }}</h4>
+                    <h5>{{ ship.getCurrentFuel }} / {{ ship.getFuelCapacity }}</h5>
+                </div>
+                <div class="col-xs-1">
+                    <h5>{{ ship.getCredits }}</h5>
                 </div>
                 <div class="col-xs-2">
                     <form action="/navigation/{{ ship.getId }}/go" method="post">
