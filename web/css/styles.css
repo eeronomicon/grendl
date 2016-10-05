@@ -23,3 +23,26 @@ h5 {
 .you-are-here {
   color: orange;
 }
+
+.trade_input {
+    height: 15px;
+    width: 50px;
+    color: black;
+    font-size: 8px;
+}
+
+.fill {
+    height: 310px;
+}
+
+.trade_row {
+    height: 310px;
+}
+
+.trade_row_top {
+    padding-bottom: 185px;
+}
+
+.right {
+    text-align: right;
+}
