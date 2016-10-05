@@ -277,7 +277,7 @@
 
         function cargoCheck($new_cargo_quantity)
         {
-            if (($this->getCargoCapacity() - $this->getCargoLoad()) > $new_cargo_quantity) {
+            if (($this->getCargoCapacity() - $this->getCargoLoad()) <= $new_cargo_quantity) {
                 return false;
             } else {
                 return true;

@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <div class='container'>
+        <div class='container center'>
             <h1 class="header-copy"><img class="header-icon" src="/img/spacetrucker2.png"> MAIN DISPLAY <img class="header-icon" src="/img/spacetrucker.png"></h1>
             <hr>
-            <h1>{{ ship.getName }}:</h1>
-            <div class='indent'>
-                <p>Cargo Level: {{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
-                <p>Fuel Level: {{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
-                <p>Credits: {{ ship.getCredits }}</p>
-                <p>Ship Location: [{{ ship.getLocation[0] }}, {{ ship.getLocation[1] }}]</p>
+            <br><br><br><br><br><br>
+            <div class='row'>
+                <div class='col-xs-5 col-xs-offset-1'>
+                    <h3>{{ ship.getName }}:</h3>
+                    <div class='indent'>
+                        <p>Cargo Level: {{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
+                        <p>Fuel Level: {{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
+                        <p>Credits: {{ ship.getCredits }}</p>
+                        <p>Ship Location: [{{ ship.getLocation[0] }}, {{ ship.getLocation[1] }}]</p>
+                    </div>
+                </div>
+                <div class='col-xs-6'>
+                    <h3>Current Location:</h3>
+                    <div class='indent'>
+                        <p>Location Type:
+                            {% if planet.getType == 1 %}
+                                Agricultural Planet
+                                <p>Planet Name: {{ planet.getName }}</p>
+                                <p>Planet Population: {{ planet.getPopulation }}</p>
+                            {% elseif planet.getType == 2 %}
+                                Industrial Planet
+                                <p>Planet Name: {{ planet.getName }}</p>
+                                <p>Planet Population: {{ planet.getPopulation }}</p>
+                            {% elseif planet.getType == 3 %}
+                                Fuel Station
+                                <p>Station Name: {{ planet.getName }}</p>
+                            {% else %}
+                                Empty Space
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
             </div>
-            <br><br><br><br>
-            <h1>Current Location:</h1>
-            <div class='indent'>
-                <p>Location Type:
-                    {% if planet.getType == 1 %}
-                        Agricultural Planet
-                        <p>Planet Name: {{ planet.getName }}</p>
-                        <p>Planet Population: {{ planet.getPopulation }}</p>
-                    {% elseif planet.getType == 2 %}
-                        Industrial Planet
-                        <p>Planet Name: {{ planet.getName }}</p>
-                        <p>Planet Population: {{ planet.getPopulation }}</p>
-                    {% elseif planet.getType == 3 %}
-                        Fuel Station
-                        <p>Station Name: {{ planet.getName }}</p>
-                    {% else %}
-                        Empty Space
-                    {% endif %}
-                </p>
-            </div>
-            <br><br><br><br>
+            <br><br><br><br><br><br><br><br>
             <form action='/navigation/{{ship.getId}}' >
                 <button class='btn form-control btn-success btn_main' type='submit'>NAVIGATE</button>
             </form>
             <br>
-            <form action='/trade/{{ship.getId}}' method='get'>
-                <button class='btn form-control btn-info btn_main' type='submit'>TRADE</button>
-            </form>
+            {% if planet.getType == 0 %}
+                <button class='btn form-control btn-info btn_main btn_unclickable'>TRADE</button>
+            {% else %}
+                <form action='/trade/{{ship.getId}}' method='get'>
+                    <button class='btn form-control btn-info btn_main' type='submit'>TRADE</button>
+                </form>
+            {% endif %}
             <hr>
             <h5 class="footer-copy">GRENDL: General Robotics Engineering Navigation &amp; Direction Logic</h5>
         </div>
