@@ -5,7 +5,7 @@
 #### By _**Stephen Burden, Ryan Apking, HK Kahng, and Jon Toler**_
 
 ## Description
-In this game, the player travels a star map that is randomly populated with planets of differing trade classifications, buys and sells goods, while maintaining a positive credit balance and a non-empty fuel tank.
+In this game, the player travels a star map that is randomly populated with planets of differing trade classifications, buys and sells goods, while maintaining a positive credit balance and a non-empty fuel tank. A humble homage to Traveller, Elite, Tai-Pan, and Firefly/Serenity.
 
 ## User Stories
 
@@ -21,24 +21,21 @@ In this game, the player travels a star map that is randomly populated with plan
 * As a player the maximum amount of trade good I can purchase is limited by (a) market supply, (b) cargo capacity, and (c) my credit balance.
 * As a player the game ends when I run out of credits or if I am out of fuel.
 
-
 ## Specifications
 See the SPECIFICATIONS.md file.
 
 ## Setup/Installation Requirements
 * _Clone the repository from the link below to your desktop_
 * _Run Composer Install to include all dependencies_
+* _Import the database into mySQL_
 * _In Terminal or Command Prompt go to the /web directory and enter the command: php -S localhost:8000_
 * _To browse go to http://localhost:8000/ in the browser of your choosing_
-
-## Link
-https://github.com/spburden/-php
 
 ## Known Bugs
 _There are no known bugs with this application._
 
 ## Support and contact details
-_spburden@hotmail.com_
+Contact us via GitHub!
 
 ## Technologies Used
 _PHP, Silex, Twig, PHP Unit, HTML, and Bootstrap_
@@ -46,4 +43,4 @@ _PHP, Silex, Twig, PHP Unit, HTML, and Bootstrap_
 ### License
 The MIT License (MIT)
 
-Copyright (c) 2016 **_Stephen Burden_**
+Copyright (c) 2016 **_Stephen Burden, Ryan Apking, HK Kahng, and Jon Toler_**
