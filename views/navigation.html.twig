@@ -10,8 +10,11 @@
             <hr>
             <div class="row">
                 <div class="col-xs-1"></div>
-                <div class="col-xs-8">
+                <div class="col-xs-6">
                     <h5>Destination Selected:</h5>
+                </div>
+                <div class="col-xs-2">
+                    <h5>Fuel Level</h5>
                 </div>
                 <div class="col-xs-2">
                     <h5>Go/No-Go:</h5>
@@ -19,21 +22,26 @@
             </div>
             <div class="row">
                 <div class="col-xs-1"></div>
-                <div class="col-xs-8">
+                <div class="col-xs-6">
                     <h4><span id="destination_name">&nbsp;</span> <span id="destination_coordinates"></span></h4>
                 </div>
                 <div class="col-xs-2">
-                    <form action="/navigation/go" method="post">
-                        <input type="hidden" name="destination_x">
-                        <input type="hidden" name="destination_y">
+                    <h4>{{ ship.getCurrentFuel }} / {{ ship.getFuelCapacity }}</h4>
+                </div>
+                <div class="col-xs-2">
+                    <form action="/navigation/{{ ship.getId }}/go" method="post">
+                        <input type="hidden" id="current_x" value="{{ ship.getLocation[0] }}">
+                        <input type="hidden" id="current_y" value="{{ ship.getLocation[1] }}">
+                        <input type="hidden" name="destination_x" id="destination_x">
+                        <input type="hidden" name="destination_y" id="destination_y">
                         <button type="submit" class="btn btn-success">Go!</button>
-                        <a href="/main" class="btn btn-warning">Abort!</a>
+                        <a href="/main_display/{{ ship.getId }}" class="btn btn-warning">Abort!</a>
                     </form>
                 </div>
             </div>
             <hr>
-            {% set shipX = 4 %}
-            {% set shipY = 5 %}
+            {% set shipX = ship.getLocation[0] %}
+            {% set shipY = ship.getLocation[1] %}
             {% set counter = 0 %}
             {% for x in 1..10 %}
                 <div class="row">
