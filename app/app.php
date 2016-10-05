@@ -41,10 +41,10 @@
         $name = $_POST['name'];
         $cargo_capacity = 100;
         $fuel_capacity = 100;
-        $credits = 500;
+        $credits = 1000000;
         $location_x = 1;
         $location_y = 1;
-        $current_fuel = 80;
+        $current_fuel = 100;
         $ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id = null);
         $ship->save();
         $ship->initializeCargo();
@@ -54,7 +54,7 @@
     $app->get('/main_display/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
         $location = $ship->getLocation();
-        $planet = Planet::findByCoordinates($location[0], $location[1]);
+        $planet = Planet::findByCoordinates($location[1], $location[0]);
         return $app['twig']->render('main_display.html.twig', array('ship' => $ship, 'planet' => $planet));
     });
 
@@ -62,14 +62,14 @@
     $app->get('/trade/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
         $location = $ship->getLocation();
-        $planet = Planet::findByCoordinates($location[0], $location[1]);
+        $planet = Planet::findByCoordinates($location[1], $location[0]);
         return $app['twig']->render('trade.html.twig', array('ship' => $ship, 'planet' => $planet));
     });
 
     $app->post('/buy/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
         $location = $ship->getLocation();
-        $planet = Planet::findByCoordinates($location[0], $location[1]);
+        $planet = Planet::findByCoordinates($location[1], $location[0]);
         $prices = $planet->getMarketValues();
         $purchase_quantities = array(
             'Ore' => $_POST['Ore'],
@@ -98,7 +98,7 @@
     $app->post('/sell/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
         $location = $ship->getLocation();
-        $planet = Planet::findByCoordinates($location[0], $location[1]);
+        $planet = Planet::findByCoordinates($location[1], $location[0]);
         $prices = $planet->getMarketValues();
         $sell_quantities = array(
             'Ore' => $_POST['Ore'],

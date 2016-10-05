@@ -9,7 +9,7 @@
         $ship->travel($_POST['destination_x'], $_POST['destination_y']);
         $ship->update();
         $location = $ship->getLocation();
-        $planet = Planet::findByCoordinates($location[0], $location[1]);
+        $planet = Planet::findByCoordinates($location[1], $location[0]);
         return $app['twig']->render('main_display.html.twig', array('ship' => $ship, 'planet' => $planet));
     });
 
