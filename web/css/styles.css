@@ -4,22 +4,45 @@ body {
   background-color: black;
 }
 
-h5 {
-  color: #2ECC71;
+.header-copy, .footer-copy {
+  text-align: center;
 }
 
 .row {
   height: 100px;
 }
 
-.col-xs-1 {
+.planet-description {
+  text-align: left;
   width: 100px;
+  min-height: 100px;
+  font-size: 8px;
+  padding-top: 8px;
+  padding-left: 8px;
+  border: 1px solid #666;
 }
 
-.planet-description {
-  font-size: 8px;
+.planet-description:hover {
+  background-color: #666;
 }
 
 .you-are-here {
   color: orange;
+}
+
+.agricultural {
+  color: #2ECC71;
+}
+
+.industrial {
+  color: #3498DB;
+}
+
+.header-icon {
+  max-height: 30px;
+  color: white;
+}
+
+.player-here {
+  background-color: #212F3D;
 }

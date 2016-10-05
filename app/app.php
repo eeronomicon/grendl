@@ -32,6 +32,8 @@
         return $app['twig']->render('home.html.twig');
     });
 
+    require_once __DIR__."/../app/navigation.php";
+
     $app->post('/new_game', function() use ($app) {
         // create a new system
         new System();

@@ -357,10 +357,9 @@
 
         static function getAll()
         {
-            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets;");
+            $returned_planets = $GLOBALS['DB']->query("SELECT * FROM planets ORDER BY location_y, location_x;");
             $planets = array();
             foreach ($returned_planets as $planet) {
-
                 $x = $planet['location_x'];
                 $y = $planet['location_y'];
                 $type = $planet['type'];
