@@ -1,0 +1,25 @@
+body {
+  font-family: 'Michroma', sans-serif;
+  color: white;
+  background-color: black;
+}
+
+h5 {
+  color: #2ECC71;
+}
+
+.row {
+  height: 100px;
+}
+
+.col-xs-1 {
+  width: 100px;
+}
+
+.planet-description {
+  font-size: 8px;
+}
+
+.you-are-here {
+  color: orange;
+}

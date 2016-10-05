@@ -24,6 +24,8 @@
         return $app['twig']->render('planet_display.html.twig', array('planets' => Planet::getAllOccupiedPlanets()));
     });
 
+    require_once __DIR__."/../app/navigation.php";
+
     $app->post("/reset", function() use ($app) {
         new System();
         return $app->redirect('/');
