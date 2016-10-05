@@ -11,7 +11,7 @@ $(document).ready(function(){
     var coordinates = $(this).attr('id').split('_');
     var location_x = $('#current_x').val();
     var location_y = $('#current_y').val();
-    var fuel = getFuelCost(coordinates[0], coordinates[1], location_x, location_y);
+    var fuel = getFuelCost(coordinates[1], coordinates[0], location_x, location_y);
     var current_fuel = $('#current_fuel').val();
     var planet_name = $(this).children('.planet_name').text();
     if (!planet_name) {
@@ -24,7 +24,7 @@ $(document).ready(function(){
     if (fuel > current_fuel) {
       $('#go_travel').prop('disabled', true);
     } else {
-      $('#go_travel').prop('disabled', false);      
+      $('#go_travel').prop('disabled', false);
     }
   });
 

@@ -10,8 +10,11 @@
             <hr>
             <div class="row">
                 <div class="col-xs-1"></div>
-                <div class="col-xs-6">
-                    <h5>Destination Selected:</h5>
+                <div class="col-xs-1">
+                    <h5>Current Location</h5>
+                </div>
+                <div class="col-xs-5">
+                    <h5>Selected Destination:</h5>
                 </div>
                 <div class="col-xs-2">
                     <h5>Fuel Level</h5>
@@ -22,7 +25,10 @@
             </div>
             <div class="row">
                 <div class="col-xs-1"></div>
-                <div class="col-xs-6">
+                <div class="col-xs-1">
+                    <h4>{{ ship.getLocation[1] }} , {{ ship.getlocation[0] }}</h4>
+                </div>
+                <div class="col-xs-5">
                     <h4><span id="destination_name">&nbsp;</span> <span id="destination_coordinates"></span></h4>
                 </div>
                 <div class="col-xs-2">
