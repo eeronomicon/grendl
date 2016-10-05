@@ -300,18 +300,6 @@
             return $quantities['Robots'];
         }
 
-        // temp function, just to display info
-        function getInventoryInfo()
-        {
-            $values = $this->getMarketValues();
-            $quantities = $this->getQuantities();
-            $string = "";
-            foreach ($values as $key => $value) {
-                $string .= $value . " / ";
-            }
-            return $string;
-        }
-
         // static functions
         static function findById($search_id)
         {

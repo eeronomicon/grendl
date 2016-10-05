@@ -30,6 +30,7 @@
                     array_push($possible_planet_locations, [$rando1, $rando2]);
                 }
             }
+
             // assign all numbers that aren't on the grid blank planets
             for ($i = 1; $i <= $universe_size_sqrt; $i++) {
                 for ($j = 1; $j <= $universe_size_sqrt; $j++) {
@@ -59,6 +60,19 @@
                 // create a fuel planet
                 $this->buildFuelingStation($location[0], $location[1]);
             }
+            $this->fixOrder($universe_size_sqrt);
+            $this->fillOccupiedPlanets();
+        }
+
+        function fixOrder($universe_size_sqrt)
+        {
+            $index = 1;
+            for ($i = 1; $i <= $universe_size_sqrt; $i++) {
+                for ($j = 1; $j <= $universe_size_sqrt; $j++) {
+                    $GLOBALS['DB']->exec("UPDATE planets SET id = {$index} WHERE location_x = {$i} AND location_y = {$j};");
+                    $index++;
+                }
+            }
         }
 
         function buildAgriculturalPlanet($x, $y)
@@ -78,10 +92,6 @@
             // create the planet
             $new_ag_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
             $new_ag_planet->save();
-            // set the initial values
-            $new_ag_planet->buildMarket();
-            $new_ag_planet->setInitialInventory();
-            $new_ag_planet->setMarketValues();
         }
 
         function buildIndustrialPlanet($x, $y)
@@ -101,10 +111,6 @@
             // create the planet
             $new_in_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
             $new_in_planet->save();
-            // set the initial values
-            $new_in_planet->buildMarket();
-            $new_in_planet->setInitialInventory();
-            $new_in_planet->setMarketValues();
         }
 
         function buildFuelingStation($x, $y)
@@ -122,6 +128,16 @@
             $new_empty_planet = new Planet($x, $y, $type, 0, 0, 0, 0);
             $new_empty_planet->save();
         }
+
+        function fillOccupiedPlanets()
+        {
+            $occupied_planets = Planet::getAllOccupiedPlanets();
+            foreach($occupied_planets as $planet) {
+                $planet->buildMarket();
+                $planet->setInitialInventory();
+                $planet->setMarketValues();
+            }
+        }
     // static functions
         static function nextTurn()
         {
@@ -131,11 +147,5 @@
                 $planet->setMarketValues();
             }
         }
-
-        static function getMap()
-        {
-          
-        }
-
     }
  ?>
