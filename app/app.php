@@ -95,6 +95,16 @@
         return $app->redirect('/trade/' . $ship->getId());
     });
 
+    $app->post('/buy_fuel/{ship_id}', function($ship_id) use ($app) {
+        $ship = Ship::find($ship_id);
+        $quantity = $_POST['quantity'];
+        if ($ship->purchaseFuelCheck($quantity, 10)) {
+            $ship->purchaseFuel($quantity, 10);
+            $ship->update();
+        }
+        return $app->redirect('/trade/' . $ship->getId());
+    });
+
     $app->post('/sell/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
         $location = $ship->getLocation();

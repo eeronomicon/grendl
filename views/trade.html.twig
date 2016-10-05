@@ -7,41 +7,43 @@
                 <hr>
                 <div class='row'>
                     <div class='col-xs-2 col-xs-offset-4 right ship_info'>
-                        <p>Ship Info</p>
+                        <p>Category</p>
                         <hr>
                         <p>Fuel Level</p>
                         <p>Cargo Level</p>
                         <p>Credits</p>
                     </div>
                     <div class='col-xs-2 ship_info'>
-                        <p>Value</p>
+                        <p>Balance</p>
                         <hr>
                         <p>{{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
                         <p>{{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
                         <p>{{ ship.getCredits }}</p>
                     </div>
                 </div>
+                <br><br><br><br>
                 <div class='row'>
                     <div class='col-xs-4'>
                         <form action='/buy_fuel/{{ ship.getId }}' method='post'>
                             <input type='hidden' value='1' name='quantity'>
-                            <button type='submit'>BUY 1 FUEL</button>
+                            <button class='btn form-control fuel_btn' type='submit'>BUY 1 FUEL<br>FOR 10 CREDITS</button>
                         </form>
                     </div>
                     <div class='col-xs-4'>
                         <form action='/buy_fuel/{{ ship.getId }}' method='post'>
                             <input type='hidden' value='10' name='quantity'>
-                            <button type='submit'>BUY 10 FUEL</button>
+                            <button class='btn form-control fuel_btn' type='submit'>BUY 10 FUEL<br>FOR 100 CREDITS</button>
                         </form>
                     </div>
 
                     <div class='col-xs-4'>
                         <form action='/buy_fuel/{{ ship.getId }}' method='post'>
                             <input type='hidden' value='50' name='quantity'>
-                            <button type='submit'>BUY 50 FUEL</button>
+                            <button class='btn form-control fuel_btn' type='submit'>BUY 50 FUEL<br>FOR 500 CREDITS</button>
                         </form>
                     </div>
                 </div>
+                <br><br><br><br>
             {% else %}
                 <h1 class="header-copy"><img class="header-icon" src="/img/spacetrucker2.png"> TRADE <img class="header-icon" src="/img/spacetrucker.png"></h1>
                 <hr>
@@ -81,14 +83,14 @@
                             <p>{{ planet.getRobotsPrice }}</p>
                         </div>
                         <div class='col-xs-2 right ship_info'>
-                            <p>Ship Info</p>
+                            <p>Category</p>
                             <hr>
                             <p>Fuel Level</p>
                             <p>Cargo Level</p>
                             <p>Credits</p>
                         </div>
                         <div class='col-xs-2 ship_info'>
-                            <p>Value</p>
+                            <p>Balance</p>
                             <hr>
                             <p>{{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
                             <p>{{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
@@ -188,14 +190,14 @@
                     </form>
                 </div>
                 <br><br>
-                <form action='/main_display/{{ ship.getId }}'>
-                    <button type='submit' class='btn form-control btn-success btn_main_display'>MAIN DISPLAY</button>
-                </form>
-                <div class='row'>
-                    <hr>
-                    <h5 class="footer-copy">GRENDL: General Robotics Engineering Navigation &amp; Direction Logic</h5>
-                </div>
             {% endif %}
+            <form action='/main_display/{{ ship.getId }}'>
+                <button type='submit' class='btn form-control btn-success btn_main_display'>MAIN DISPLAY</button>
+            </form>
+            <div class='row'>
+                <hr>
+                <h5 class="footer-copy">GRENDL: General Robotics Engineering Navigation &amp; Direction Logic</h5>
+            </div>
         </div>
     </body>
 </html>

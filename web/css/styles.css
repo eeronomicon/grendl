@@ -104,3 +104,7 @@ body {
     background-color: gray;
     cursor: not-allowed;
 }
+
+.fuel_btn {
+    height: 100px;
+}
