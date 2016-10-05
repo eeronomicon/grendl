@@ -8,6 +8,30 @@
         <div class="container">
             <h1 class="header-copy"><img class="header-icon" src="/img/spacetrucker2.png"> NAVIGATION <img class="header-icon" src="/img/spacetrucker.png"></h1>
             <hr>
+            <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-8">
+                    <h5>Destination Selected:</h5>
+                </div>
+                <div class="col-xs-2">
+                    <h5>Go/No-Go:</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-8">
+                    <h4><span id="destination_name">&nbsp;</span> <span id="destination_coordinates"></span></h4>
+                </div>
+                <div class="col-xs-2">
+                    <form action="/navigation/go" method="post">
+                        <input type="hidden" name="destination_x">
+                        <input type="hidden" name="destination_y">
+                        <button type="submit" class="btn btn-success">Go!</button>
+                        <a href="/main" class="btn btn-warning">Abort!</a>
+                    </form>
+                </div>
+            </div>
+            <hr>
             {% set shipX = 4 %}
             {% set shipY = 5 %}
             {% set counter = 0 %}
