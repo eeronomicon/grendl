@@ -2,37 +2,45 @@
 <html>
     <body>
         <div class='container'>
-            <h1>Ship Info</h1>
+            <h1 class="header-copy"><img class="header-icon" src="/img/spacetrucker2.png"> MAIN DISPLAY <img class="header-icon" src="/img/spacetrucker.png"></h1>
             <hr>
-            <h4>Ship Name: {{ ship.getName }}</h4>
-            <h6>Cargo Level: {{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</h6>
-            <h6>Fuel Level: {{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</h6>
-            <h6>Credits: {{ ship.getCredits }}</h6>
-            <h6>Ship Location: [{{ ship.getLocation[0] }}, {{ ship.getLocation[1] }}]</h6>
-            <hr>
-            <h4>Current Location Type:
-                {% if planet.getType == 1 %}
-                    Agricultural Planet
-                    <h6>Planet Name: {{ planet.getName }}</h6>
-                    <h6>Planet Population: {{ planet.getPopulation }}</h6>
-                {% elseif planet.getType == 2 %}
-                    Industrial Planet
-                    <h6>Planet Name: {{ planet.getName }}</h6>
-                    <h6>Planet Population: {{ planet.getPopulation }}</h6>
-                {% elseif planet.getType == 3 %}
-                    Fuel Station
-                    <h6>Station Name: {{ planet.getName }}</h6>
-                {% else %}
-                    Empty Space
-                {% endif %}
-            </h4>
-            <form action= >
-                <button class='btn form-control' type='submit'>NAVIGATE</button>
+            <h1>{{ ship.getName }}:</h1>
+            <div class='indent'>
+                <p>Cargo Level: {{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
+                <p>Fuel Level: {{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
+                <p>Credits: {{ ship.getCredits }}</p>
+                <p>Ship Location: [{{ ship.getLocation[0] }}, {{ ship.getLocation[1] }}]</p>
+            </div>
+            <br><br><br><br>
+            <h1>Current Location:</h1>
+            <div class='indent'>
+                <p>Location Type:
+                    {% if planet.getType == 1 %}
+                        Agricultural Planet
+                        <p>Planet Name: {{ planet.getName }}</p>
+                        <p>Planet Population: {{ planet.getPopulation }}</p>
+                    {% elseif planet.getType == 2 %}
+                        Industrial Planet
+                        <p>Planet Name: {{ planet.getName }}</p>
+                        <p>Planet Population: {{ planet.getPopulation }}</p>
+                    {% elseif planet.getType == 3 %}
+                        Fuel Station
+                        <p>Station Name: {{ planet.getName }}</p>
+                    {% else %}
+                        Empty Space
+                    {% endif %}
+                </p>
+            </div>
+            <br><br><br><br>
+            <form action='/navigation/{{ship.getId}}' >
+                <button class='btn form-control btn-success btn_main' type='submit'>NAVIGATE</button>
             </form>
             <br>
             <form action='/trade/{{ship.getId}}' method='get'>
-                <button class='btn form-control' type='submit'>TRADE</button>
+                <button class='btn form-control btn-info btn_main' type='submit'>TRADE</button>
             </form>
+            <hr>
+            <h5 class="footer-copy">GRENDL: General Robotics Engineering Navigation &amp; Direction Logic</h5>
         </div>
     </body>
 </html>
