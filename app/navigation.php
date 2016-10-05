@@ -10,6 +10,7 @@
         $ship->update();
         $location = $ship->getLocation();
         $planet = Planet::findByCoordinates($location[1], $location[0]);
+        System::nextTurn();
         return $app['twig']->render('main_display.html.twig', array('ship' => $ship, 'planet' => $planet));
     });
 
