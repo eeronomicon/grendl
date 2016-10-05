@@ -296,6 +296,82 @@
             $this->assertLessThan($first_output, $second_output);
         }
 
+        function test_priceGetters()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+            $test_planet->buildMarket();
+            $test_planet->setInitialInventory();
+            $test_planet->setMarketValues();
+
+            //Act
+            $output1 = $test_planet->getOrePrice();
+            $output2 = $test_planet->getLivestockPrice();
+            $output3 = $test_planet->getGrainPrice();
+            $output4 = $test_planet->getConsumablesPrice();
+            $output5 = $test_planet->getConsumerGoodsPrice();
+            $output6 = $test_planet->getHeavyMachineryPrice();
+            $output7 = $test_planet->getMilitaryHardwarePrice();
+            $output8 = $test_planet->getRobotsPrice();
+
+
+            //Assert
+            $this->assertGreaterThan(0, $output1);
+            $this->assertGreaterThan(0, $output2);
+            $this->assertGreaterThan(0, $output3);
+            $this->assertGreaterThan(0, $output4);
+            $this->assertGreaterThan(0, $output5);
+            $this->assertGreaterThan(0, $output6);
+            $this->assertGreaterThan(0, $output7);
+            $this->assertGreaterThan(0, $output8);
+        }
+
+        function test_quantityGetters()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+            $test_planet->buildMarket();
+            $test_planet->setInitialInventory();
+            $test_planet->setMarketValues();
+
+            //Act
+            $output1 = $test_planet->getOreQuantity();
+            $output2 = $test_planet->getLivestockQuantity();
+            $output3 = $test_planet->getGrainQuantity();
+            $output4 = $test_planet->getConsumablesQuantity();
+            $output5 = $test_planet->getConsumerGoodsQuantity();
+            $output6 = $test_planet->getHeavyMachineryQuantity();
+            $output7 = $test_planet->getMilitaryHardwareQuantity();
+            $output8 = $test_planet->getRobotsQuantity();
+
+
+            //Assert
+            $this->assertEquals(0, $output1);
+            $this->assertGreaterThan(0, $output2);
+            $this->assertEquals(0, $output3);
+            $this->assertGreaterThan(0, $output4);
+            $this->assertEquals(0, $output5);
+            $this->assertEquals(0, $output6);
+            $this->assertEquals(0, $output7);
+            $this->assertEquals(0, $output8);
+        }
+
     }
         // export PATH=$PATH:./vendor/bin first and then you will only have to run  $ phpunit tests
 ?>

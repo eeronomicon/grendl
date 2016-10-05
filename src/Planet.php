@@ -206,82 +206,98 @@
 
         function getOrePrice()
         {
-
+          $prices = $this->getMarketValues();
+          return $prices['Ore'];
         }
 
         function getGrainPrice()
         {
-
+            $prices = $this->getMarketValues();
+            return $prices['Grain'];
         }
 
         function getLivestockPrice()
         {
-
+            $prices = $this->getMarketValues();
+            return $prices['Livestock'];
         }
 
         function getConsumablesPrice()
         {
-
+            $prices = $this->getMarketValues();
+            return $prices['Consumables'];
         }
 
         function getConsumerGoodsPrice()
         {
-
+            $prices = $this->getMarketValues();
+            return $prices['Consumer Goods'];
         }
 
         function getHeavyMachineryPrice()
         {
-
+            $prices = $this->getMarketValues();
+            return $prices['Heavy Machinery'];
         }
 
         function getMilitaryHardwarePrice()
         {
-
+            $prices = $this->getMarketValues();
+            return $prices['Military Hardware'];
         }
 
         function getRobotsPrice()
         {
-
+            $prices = $this->getMarketValues();
+            return $prices['Robots'];
         }
 
         function getOreQuantity()
         {
-
+            $quantities = $this->getQuantities();
+            return $quantities['Ore'];
         }
 
         function getGrainQuantity()
         {
-
+            $quantities = $this->getQuantities();
+            return $quantities['Grain'];
         }
 
         function getLivestockQuantity()
         {
-
+            $quantities = $this->getQuantities();
+            return $quantities['Livestock'];
         }
 
         function getConsumablesQuantity()
         {
-
+            $quantities = $this->getQuantities();
+            return $quantities['Consumables'];
         }
 
         function getConsumerGoodsQuantity()
         {
-
+            $quantities = $this->getQuantities();
+            return $quantities['Consumer Goods'];
         }
 
         function getHeavyMachineryQuantity()
         {
-
+            $quantities = $this->getQuantities();
+            return $quantities['Heavy Machinery'];
         }
 
         function getMilitaryHardwareQuantity()
         {
-
+            $quantities = $this->getQuantities();
+            return $quantities['Military Hardware'];
         }
 
         function getRobotsQuantity()
         {
-
+            $quantities = $this->getQuantities();
+            return $quantities['Robots'];
         }
 
         // temp function, just to display info
