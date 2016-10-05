@@ -50,12 +50,20 @@
         $ship->initializeCargo();
         return $app->redirect('/main_display/' . $ship->getId());
     });
-
+    // main page routes
     $app->get('/main_display/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
         $location = $ship->getLocation();
         $planet = Planet::findByCoordinates($location[0], $location[1]);
         return $app['twig']->render('main_display.html.twig', array('ship' => $ship, 'planet' => $planet));
+    });
+
+    // trade routes
+    $app->get('/trade/{ship_id}', function($ship_id) use ($app) {
+        $ship = Ship::find($ship_id);
+        $location = $ship->getLocation();
+        $planet = Planet::findByCoordinates($location[0], $location[1]);
+        return $app['twig']->render('trade.html.twig', array('ship' => $ship, 'planet' => $planet));
     });
 
 

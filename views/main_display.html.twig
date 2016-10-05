@@ -8,21 +8,31 @@
             <h6>Cargo Level: {{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</h6>
             <h6>Fuel Level: {{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</h6>
             <h6>Credits: {{ ship.getCredits }}</h6>
-            <h6>Ship Location: X: {{ ship.getLocation[0] }}, Y: {{ ship.getLocation[1] }}</h6>
+            <h6>Ship Location: [{{ ship.getLocation[0] }}, {{ ship.getLocation[1] }}]</h6>
             <hr>
-            <h4>Current Location:</h4>
-            {% if planet.getType == 1 %}
-                <h6>Type: Agricultural Planet</h6>
-                <h6>Planet Name: {{ planet.getName }}</h6>
-            {% elseif planet.getType == 2 %}
-                <h6>Type: Industrial Planet</h6>
-                <h6>Planet Name: {{ planet.getName }}</h6>
-            {% elseif planet.getType == 3 %}
-                <h6>Type: Fuel Station</h6>
-                <h6>Station Name: {{ planet.getName }}</h6>
-            {% else %}
-                <h6>Type: Empty Space</h6>
-            {% endif %}
+            <h4>Current Location Type:
+                {% if planet.getType == 1 %}
+                    Agricultural Planet
+                    <h6>Planet Name: {{ planet.getName }}</h6>
+                    <h6>Planet Population: {{ planet.getPopulation }}</h6>
+                {% elseif planet.getType == 2 %}
+                    Industrial Planet
+                    <h6>Planet Name: {{ planet.getName }}</h6>
+                    <h6>Planet Population: {{ planet.getPopulation }}</h6>
+                {% elseif planet.getType == 3 %}
+                    Fuel Station
+                    <h6>Station Name: {{ planet.getName }}</h6>
+                {% else %}
+                    Empty Space
+                {% endif %}
+            </h4>
+            <form action= >
+                <button class='btn form-control' type='submit'>NAVIGATE</button>
+            </form>
+            <br>
+            <form action='/trade/{{ship.getId}}' method='get'>
+                <button class='btn form-control' type='submit'>TRADE</button>
+            </form>
         </div>
     </body>
 </html>

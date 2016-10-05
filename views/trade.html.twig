@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class='container'>
+            <h1>Market Values</h1>
+
+            <div class='row trade_row_top'>
+
+                    <div class='col-xs-3 col-xs-offset-1 right'>
+                        <p>Agricultural Items</p>
+                        <hr>
+                        <p>Ore</p>
+                        <p>Grain</p>
+                        <p>Livestock</p>
+                        <p>Consumables</p>
+                    </div>
+                    <div class='col-xs-1'>
+                        <p>Value</p>
+                        <hr>
+                        <p>{{ planet.getOrePrice }}</p>
+                        <p>{{ planet.getGrainPrice }}</p>
+                        <p>{{ planet.getLivestockPrice }}</p>
+                        <p>{{ planet.getConsumablesPrice }}</p>
+                    </div>
+                    <div class='col-xs-3 col-xs-offset-1 right'>
+                        <p>Industrial Items</p>
+                        <hr>
+                        <p>Consumer Goods</p>
+                        <p>Heavy Machinery</p>
+                        <p>Military Hardware</p>
+                        <p>Robots</p>
+                    </div>
+                    <div class='col-xs-1'>
+                        <p>Value</p>
+                        <hr>
+                        <p>{{ planet.getConsumerGoodsPrice }}</p>
+                        <p>{{ planet.getHeavyMachineryPrice }}</p>
+                        <p>{{ planet.getMilitaryHardwarePrice }}</p>
+                        <p>{{ planet.getRobotsPrice }}</p>
+                    </div>
+            </div>
+
+            <h1>Planet Inventory:</h1>
+            <div class='row trade_row'>
+                <form action='/buy/{{ ship.getId }}' method='post'>
+                    <div class='col-xs-1 col-xs-offset-1'>
+                        <p>Units</p>
+                        <hr>
+                        <p>{{ planet.getOreQuantity }}</p>
+                        <p>{{ planet.getGrainQuantity }}</p>
+                        <p>{{ planet.getLivestockQuantity }}</p>
+                        <p>{{ planet.getConsumablesQuantity }}</p>
+                        <p>{{ planet.getConsumerGoodsQuantity }}</p>
+                        <p>{{ planet.getHeavyMachineryQuantity }}</p>
+                        <p>{{ planet.getMilitaryHardwareQuantity }}</p>
+                        <p>{{ planet.getRobotsQuantity }}</p>
+                    </div>
+                    <div class='col-xs-3 col-xs-offset-1'>
+                        <p>Item</p>
+                        <hr>
+                        <p>Ore</p>
+                        <p>Grain</p>
+                        <p>Livestock</p>
+                        <p>Consumables</p>
+                        <p>Consumer Goods</p>
+                        <p>Heavy Machinery</p>
+                        <p>Military Hardware</p>
+                        <p>Robots</p>
+                    </div>
+                    <div class='col-xs-1 col-xs-offset-1'>
+                        <p>Buy</p>
+                        <hr>
+                        <p><input class='trade_input' name='Ore' type='number' min='0' max='{{ planet.getOreQuantity }}'></p>
+                        <p><input class='trade_input' name='Grain' type='number' min='0' max='{{ planet.getGrainQuantity }}'></p>
+                        <p><input class='trade_input' name='Livestock' type='number' min='0' max='{{ planet.getLivestockQuantity }}'></p>
+                        <p><input class='trade_input' name='Consumables' type='number' min='0' max='{{ planet.getConsumablesQuantity }}'></p>
+                        <p><input class='trade_input' name='Consumer Goods' type='number' min='0' max='{{ planet.getConsumerGoodsQuantity }}'></p>
+                        <p><input class='trade_input' name='Heavy Machinery' type='number' min='0' max='{{ planet.getHeavyMachineryQuantity }}'></p>
+                        <p><input class='trade_input' name='Military Hardware' type='number' min='0' max='{{ planet.getMilitaryHardwareQuantity }}'></p>
+                        <p><input class='trade_input' name='Robots' type='number' min='0' max='{{ planet.getRobotsQuantity }}'></p>
+                    </div>
+                    <div class='col-xs-2 col-xs-offset-1'>
+                        <button class='btn form-control fill' type='submit'>BUY</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <h1>Ship Inventory:</h1>
+            <div class='row'>
+                <form action='/main_display/{{ ship.getId }}' >
+                    <div class='col-xs-1 col-xs-offset-1'>
+                        <p>Units</p>
+                        <hr>
+                        <p>{{ ship.getCargoManifest[0].getQuantity }}</p>
+                        <p>{{ ship.getCargoManifest[1].getQuantity }}</p>
+                        <p>{{ ship.getCargoManifest[2].getQuantity }}</p>
+                        <p>{{ ship.getCargoManifest[3].getQuantity }}</p>
+                        <p>{{ ship.getCargoManifest[4].getQuantity }}</p>
+                        <p>{{ ship.getCargoManifest[5].getQuantity }}</p>
+                        <p>{{ ship.getCargoManifest[6].getQuantity }}</p>
+                        <p>{{ ship.getCargoManifest[7].getQuantity }}</p>
+                    </div>
+                    <div class='col-xs-3 col-xs-offset-1'>
+                        <p>Item</p>
+                        <hr>
+                        <p>Ore</p>
+                        <p>Grain</p>
+                        <p>Livestock</p>
+                        <p>Consumables</p>
+                        <p>Consumer Goods</p>
+                        <p>Heavy Machinery</p>
+                        <p>Military Hardware</p>
+                        <p>Robots</p>
+                    </div>
+                    <div class='col-xs-1 col-xs-offset-1'>
+                        <p>Sell</p>
+                        <hr>
+                        <p><input class='trade_input' name='Ore' type='number' min='0' max='{{ ship.getCargoManifest[0].getQuantity }}'></p>
+                        <p><input class='trade_input' name='Grain' type='number' min='0' max='{{ ship.getCargoManifest[1].getQuantity }}'></p>
+                        <p><input class='trade_input' name='Livestock' type='number' min='0' max='{{ ship.getCargoManifest[2].getQuantity }}'></p>
+                        <p><input class='trade_input' name='Consumables' type='number' min='0' max='{{ ship.getCargoManifest[3].getQuantity }}'></p>
+                        <p><input class='trade_input' name='Consumer Goods' type='number' min='0' max='{{ ship.getCargoManifest[4].getQuantity }}'></p>
+                        <p><input class='trade_input' name='Heavy Machinery' type='number' min='0' max='{{ ship.getCargoManifest[5].getQuantity }}'></p>
+                        <p><input class='trade_input' name='Military Hardware' type='number' min='0' max='{{ ship.getCargoManifest[6].getQuantity }}'></p>
+                        <p><input class='trade_input' name='Robots' type='number' min='0' max='{{ ship.getCargoManifest[7].getQuantity }}'></p>
+                    </div>
+                    <div class='col-xs-2 col-xs-offset-1'>
+                        <button class='btn form-control fill' type='submit'>SELL</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
