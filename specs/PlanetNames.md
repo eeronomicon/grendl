@@ -1,0 +1,102 @@
+Odriulia
+Echoyhines
+Vobrarth
+Eslion
+Peyter
+Yiylia
+Gretothea
+Slamanus
+Treron NQ5
+Trore HU
+Tusneinus
+Deproilara
+Maswov
+Gacrorth
+Mopra
+Xuagantu
+Brusoclite
+Snegunides
+Shurn 3G17
+Scilia 48
+Cestreter
+Fawhauter
+Hosnora
+Vapriea
+Aovis
+Aenerth
+Pruzozuno
+Shoahiri
+Glomia 02A
+Plade BIL
+Dopraopra
+Tabreyhiri
+Kathiuq
+Zocrade
+Goeria
+Iahines
+Gredotov
+Grafonides
+Whiea A07
+Blinda 65D
+Mostreotania
+Xoswaolea
+Qeshapus
+Askoria
+Foynus
+Aitune
+Fluwoliv
+Blozaturn
+Bleshan WIB
+Glore C279
+Iabreynus
+Dewheutera
+Jaglapus
+Powhadus
+Aynov
+Negawa
+Scolacarro
+Slaeruta
+Crarvis 4
+Freon DJJL
+Kaploihiri
+Utroalea
+Kogleon
+Xacriea
+Vophus
+Suyrilia
+Whekaliv
+Frufawei
+Smiuq 9T7M
+Snao 69C
+Xusmiuruta
+Gufroythea
+Ruthore
+Esnade
+Seylia
+Teulara
+Glagutania
+Thunuter
+Grarth JK
+Ploria XIGM
+Yasmuihines
+Ugliotune
+Peshippe
+Rospion
+Ailiv
+Duotera
+Strouter
+Strasobos
+Shars 75Y
+Strade TD
+Uchuegantu
+Obrewei
+Askeron
+Ducrosie
+Liylea
+Rouclite
+Braputhea
+Straconus
+Blichi WMOE
+Wheshan OEP
+
+fantasynamegenerators.com/planet_names.php
