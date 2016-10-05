@@ -6,15 +6,17 @@
     </head>
     <body>
         <div class='container'>
-            <h1>Space Truckin</h1>
+            <h1 class="header-copy"><img class="header-icon" src="/img/spacetrucker2.png"> SPACE TRUCKIN <img class="header-icon" src="/img/spacetrucker.png"></h1>
             <hr>
-            <h4>Start a new game</h4>
-
+            <h3>Start a new game:</h3>
+            <br><br><br><br>
             <form action="/new_game" method="post">
-                <label for="">Enter ship name:</label>
-                <input type="text" name="name" required>
-                <button type="submit">To Space!</button>
+                <input class='form-control start_input' type="text" name="name" required placeholder="ENTER SHIP NAME">
+                <br><br><br><br>
+                <button class='form-control btn btn-danger start_button' type="submit">To Space!</button>
             </form>
+            <hr>
+            <h5 class="footer-copy">GRENDL: General Robotics Engineering Navigation &amp; Direction Logic</h5>
         </div>
     </body>
 </html>

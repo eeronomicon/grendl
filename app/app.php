@@ -66,7 +66,56 @@
         return $app['twig']->render('trade.html.twig', array('ship' => $ship, 'planet' => $planet));
     });
 
+    $app->post('/buy/{ship_id}', function($ship_id) use ($app) {
+        $ship = Ship::find($ship_id);
+        $location = $ship->getLocation();
+        $planet = Planet::findByCoordinates($location[0], $location[1]);
+        $prices = $planet->getMarketValues();
+        $purchase_quantities = array(
+            'Ore' => $_POST['Ore'],
+            'Grain' => $_POST['Grain'],
+            'Livestock' => $_POST['Livestock'],
+            'Consumables' => $_POST['Consumables'],
+            'Consumer Goods' => $_POST['Consumer_Goods'],
+            'Heavy Machinery' => $_POST['Heavy_Machinery'],
+            'Military Hardware' => $_POST['Military_Hardware'],
+            'Robots' => $_POST['Robots']
+        );
+        $total = array_sum($purchase_quantities);
+        // return $ship->cargoCheck($total);
+        if ($ship->cargoCheck($total)) {
+            foreach($purchase_quantities as $key => $quantity) {
+                if ($ship->creditCheck($quantity, $prices[$key])) {
+                    $ship->buyTradeGood($key, $quantity, $prices[$key]);
+                    $planet->removeInventory($key, $quantity);
+                    $ship->update();
+                }
+            }
+        }
+        return $app->redirect('/trade/' . $ship->getId());
+    });
 
+    $app->post('/sell/{ship_id}', function($ship_id) use ($app) {
+        $ship = Ship::find($ship_id);
+        $location = $ship->getLocation();
+        $planet = Planet::findByCoordinates($location[0], $location[1]);
+        $prices = $planet->getMarketValues();
+        $sell_quantities = array(
+            'Ore' => $_POST['Ore'],
+            'Grain' => $_POST['Grain'],
+            'Livestock' => $_POST['Livestock'],
+            'Consumables' => $_POST['Consumables'],
+            'Consumer Goods' => $_POST['Consumer_Goods'],
+            'Heavy Machinery' => $_POST['Heavy_Machinery'],
+            'Military Hardware' => $_POST['Military_Hardware'],
+            'Robots' => $_POST['Robots']
+        );
+        foreach($sell_quantities as $key => $quantity) {
+            $ship->sellTradeGood($key, $quantity, $prices[$key]);
+            $ship->update();
+        }
+        return $app->redirect('/trade/' . $ship->getId());
+    });
 
 
     return $app;

@@ -59,7 +59,7 @@ body {
 }
 
 .trade_row_top {
-    padding-bottom: 185px;
+    padding-bottom: 10px;
 }
 
 .right {
@@ -72,4 +72,35 @@ body {
 
 .btn_main {
     height: 200px;
+}
+
+.btn_main_display {
+    height: 100px;
+    background-color: #2ECC71;
+}
+
+.btn_main_display:hover {
+    background-color: #29b765;
+}
+
+.ship_info {
+    color: #2ECC71;
+}
+
+.start_input {
+    text-align: center;
+}
+
+.start_button {
+    text-align: center;
+    height: 200px;
+}
+
+.btn_unclickable {
+    background-color: gray;
+}
+
+.btn_unclickable:hover {
+    background-color: gray;
+    cursor: not-allowed;
 }
