@@ -132,5 +132,10 @@
             }
         }
 
+        static function getMap()
+        {
+          
+        }
+
     }
  ?>

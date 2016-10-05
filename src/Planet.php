@@ -204,6 +204,86 @@
             $GLOBALS['DB']->exec("UPDATE inventory SET quantity = quantity - {$quantity} WHERE id_planets = {$this->id} AND id_tradegoods = {$tradegood_id};");
         }
 
+        function getOrePrice()
+        {
+
+        }
+
+        function getGrainPrice()
+        {
+
+        }
+
+        function getLivestockPrice()
+        {
+
+        }
+
+        function getConsumablesPrice()
+        {
+
+        }
+
+        function getConsumerGoodsPrice()
+        {
+
+        }
+
+        function getHeavyMachineryPrice()
+        {
+
+        }
+
+        function getMilitaryHardwarePrice()
+        {
+
+        }
+
+        function getRobotsPrice()
+        {
+
+        }
+
+        function getOreQuantity()
+        {
+
+        }
+
+        function getGrainQuantity()
+        {
+
+        }
+
+        function getLivestockQuantity()
+        {
+
+        }
+
+        function getConsumablesQuantity()
+        {
+
+        }
+
+        function getConsumerGoodsQuantity()
+        {
+
+        }
+
+        function getHeavyMachineryQuantity()
+        {
+
+        }
+
+        function getMilitaryHardwareQuantity()
+        {
+
+        }
+
+        function getRobotsQuantity()
+        {
+
+        }
+
         // temp function, just to display info
         function getInventoryInfo()
         {
