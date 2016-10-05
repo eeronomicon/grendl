@@ -20,15 +20,39 @@
                     <div class='indent'>
                         <p>Location Type:
                             {% if planet.getType == 1 %}
-                                Agricultural Planet
+                                Agricultural Planet <span class="glyphicon glyphicon-star planet-icon agricultural">
                                 <p>Planet Name: {{ planet.getName }}</p>
-                                <p>Planet Population: {{ planet.getPopulation }}</p>
+                                <p>Planet Population:
+                                    {% if planet.getPopulation == 1 %}
+                                        Low
+                                        <span class="glyphicon glyphicon-user planet-icon"></span>
+                                    {% elseif planet.getPopulation == 2 %}
+                                        Medium
+                                        <span class="glyphicon glyphicon-user planet-icon"></span><span class="glyphicon glyphicon-user planet-icon"></span>
+                                    {% elseif planet.getPopulation == 3 %}
+                                        High
+                                        <span class="glyphicon glyphicon-user planet-icon"></span><span class="glyphicon glyphicon-user planet-icon"></span><span class="glyphicon glyphicon-user planet-icon"></span>
+                                    {% else %}
+                                    {% endif %}
+                                </p>
                             {% elseif planet.getType == 2 %}
-                                Industrial Planet
+                                Industrial Planet <span class="glyphicon glyphicon-star planet-icon industrial">
                                 <p>Planet Name: {{ planet.getName }}</p>
-                                <p>Planet Population: {{ planet.getPopulation }}</p>
+                                <p>Planet Population:
+                                    {% if planet.getPopulation == 1 %}
+                                        Low
+                                        <span class="glyphicon glyphicon-user planet-icon"></span>
+                                    {% elseif planet.getPopulation == 2 %}
+                                        Medium
+                                        <span class="glyphicon glyphicon-user planet-icon"></span><span class="glyphicon glyphicon-user planet-icon"></span>
+                                    {% elseif planet.getPopulation == 3 %}
+                                        High
+                                        <span class="glyphicon glyphicon-user planet-icon"></span><span class="glyphicon glyphicon-user planet-icon"></span><span class="glyphicon glyphicon-user planet-icon"></span>
+                                    {% else %}
+                                    {% endif %}
+                                </p>
                             {% elseif planet.getType == 3 %}
-                                Fuel Station
+                                Fuel Station <span class="glyphicon glyphicon-tint planet-icon">
                                 <p>Station Name: {{ planet.getName }}</p>
                             {% else %}
                                 Empty Space

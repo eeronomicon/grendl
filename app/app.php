@@ -39,13 +39,14 @@
         new System();
         // create a new Ship
         $name = $_POST['name'];
-        $cargo_capacity = 100;
-        $fuel_capacity = 100;
-        $credits = 1000000;
-        $location_x = 1;
-        $location_y = 1;
-        $current_fuel = 100;
-        $ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id = null);
+        // $cargo_capacity = 100;
+        // $fuel_capacity = 100;
+        // $credits = 1000000;
+        // $location_x = 1;
+        // $location_y = 1;
+        // $current_fuel = 100;
+        $parameters = System::getGameplayParameters();
+        $ship = new Ship($name, $parameters['max_cargo'], $parameters['max_fuel'], $parameters['starting_credits'], $parameters['starting_x'], $parameters['starting_y'], $parameters['starting_fuel'], $id = null);
         $ship->save();
         $ship->initializeCargo();
         return $app->redirect('/main_display/' . $ship->getId());
@@ -63,7 +64,8 @@
         $ship = Ship::find($ship_id);
         $location = $ship->getLocation();
         $planet = Planet::findByCoordinates($location[1], $location[0]);
-        return $app['twig']->render('trade.html.twig', array('ship' => $ship, 'planet' => $planet));
+        $fuel_price = System::getGameplayParameters()['fuel_price'];
+        return $app['twig']->render('trade.html.twig', array('ship' => $ship, 'planet' => $planet, 'fuel_price' => $fuel_price));
     });
 
     $app->post('/buy/{ship_id}', function($ship_id) use ($app) {
@@ -98,8 +100,9 @@
     $app->post('/buy_fuel/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
         $quantity = $_POST['quantity'];
-        if ($ship->purchaseFuelCheck($quantity, 10)) {
-            $ship->purchaseFuel($quantity, 10);
+        $parameters = System::getGameplayParameters();
+        if ($ship->purchaseFuelCheck($quantity, $parameters['fuel_price'])) {
+            $ship->purchaseFuel($quantity, $parameters['fuel_price']);
             $ship->update();
         }
         return $app->redirect('/trade/' . $ship->getId());

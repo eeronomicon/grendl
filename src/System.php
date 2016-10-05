@@ -147,5 +147,17 @@
                 $planet->setMarketValues();
             }
         }
+
+        static function getGameplayParameters()
+        {
+            $returned_parameters = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE type = 'gameplay';");
+            // $parameters = $returned_parameters->fetchAll(PDO::FETCH_ASSOC);
+            $parameters = array();
+            foreach($returned_parameters as $parameter) {
+                $temp_array = array($parameter['name'] => $parameter['value']);
+                $parameters = array_merge($parameters, $temp_array);
+            }
+            return $parameters;
+        }
     }
  ?>
