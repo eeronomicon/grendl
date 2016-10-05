@@ -5,7 +5,7 @@
 #### By _**Stephen Burden, Ryan Apking, HK Kahng, and Jon Toler**_
 
 ## Description
-In this game, the player travels a star map that is randomly populated with planets of differing trade classifications, buys and sells goods, while maintaining a positive credit balance and a non-empty fuel tank. A humble homage to Traveller, Elite, Tai-Pan, and Firefly/Serenity.
+In this game, the player travels a star map that is randomly populated with planets of differing trade classifications, buys and sells goods, while maintaining a positive credit balance and a non-empty fuel tank. A humble homage to Traveller, Elite, Tai-Pan, and Firefly/Serenity. And there's the obvious Deep Purple reference ('Silver Machine' was another possible name choice).
 
 ## User Stories
 
