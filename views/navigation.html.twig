@@ -21,11 +21,11 @@
                         <div class="col-xs-1 planet-description" id="{{ planets[counter].getX }}_{{ planets[counter].getY }}">
                     {% endif %}
                         {% if planets[counter].getType != 0 %}
-                            <p>{{ planets[counter].getName }}</p>
+                            <p class="planet_name">{{ planets[counter].getName }}</p>
                             {% if planets[counter].getType == 1 %}
                                 <h5><span class="glyphicon glyphicon-star planet-icon agricultural"></span></h5>
                             {% elseif planets[counter].getType == 2 %}
-                                <h5><span class="glyphicon glyphicon-star-empty planet-icon industrial"></span></h5>
+                                <h5><span class="glyphicon glyphicon-star planet-icon industrial"></span></h5>
                             {% else %}
                                 <h5><span class="glyphicon glyphicon-tint planet-icon"></span></h5>
                             {% endif %}
