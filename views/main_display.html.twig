@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class='container'>
+            <h1>Ship Info</h1>
+            <hr>
+            <h4>Ship Name: {{ ship.getName }}</h4>
+            <h6>Cargo Level: {{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</h6>
+            <h6>Fuel Level: {{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</h6>
+            <h6>Credits: {{ ship.getCredits }}</h6>
+            <h6>Ship Location: X: {{ ship.getLocation[0] }}, Y: {{ ship.getLocation[1] }}</h6>
+            <hr>
+            <h4>Current Location:</h4>
+            {% if planet.getType == 1 %}
+                <h6>Type: Agricultural Planet</h6>
+                <h6>Planet Name: {{ planet.getName }}</h6>
+            {% elseif planet.getType == 2 %}
+                <h6>Type: Industrial Planet</h6>
+                <h6>Planet Name: {{ planet.getName }}</h6>
+            {% elseif planet.getType == 3 %}
+                <h6>Type: Fuel Station</h6>
+                <h6>Station Name: {{ planet.getName }}</h6>
+            {% else %}
+                <h6>Type: Empty Space</h6>
+            {% endif %}
+        </div>
+    </body>
+</html>

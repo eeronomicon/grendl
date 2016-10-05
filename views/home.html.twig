@@ -5,21 +5,16 @@
         <title></title>
     </head>
     <body>
-        <h1>Return</h1>
+        <div class='container'>
+            <h1>Space Truckin</h1>
+            <hr>
+            <h4>Start a new game</h4>
 
-        <form class="" action="/result" method="post">
-            <label for="">Enter :</label>
-            <input type="text" name="" required>
-            <button type="submit" name="button">Return</button>
-        </form>
-        <div class="result">
-            {% if result %}
-            <h2> This result is {{ result }}</h2>
-            {% endif %}
-            
-            {% for car in matchingCars %}
-                <li> {{ car.getModel }} </li>
-            {% endfor %}
+            <form action="/new_game" method="post">
+                <label for="">Enter ship name:</label>
+                <input type="text" name="name" required>
+                <button type="submit">To Space!</button>
+            </form>
         </div>
     </body>
 </html>
