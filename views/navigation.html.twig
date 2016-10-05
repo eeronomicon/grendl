@@ -32,9 +32,10 @@
                     <form action="/navigation/{{ ship.getId }}/go" method="post">
                         <input type="hidden" id="current_x" value="{{ ship.getLocation[0] }}">
                         <input type="hidden" id="current_y" value="{{ ship.getLocation[1] }}">
+                        <input type="hidden" id="current_fuel" value="{{ ship.getCurrentFuel }}">
                         <input type="hidden" name="destination_x" id="destination_x">
                         <input type="hidden" name="destination_y" id="destination_y">
-                        <button type="submit" class="btn btn-success">Go!</button>
+                        <button type="submit" class="btn btn-success" id="go_travel">Go!</button>
                         <a href="/main_display/{{ ship.getId }}" class="btn btn-warning">Abort!</a>
                     </form>
                 </div>

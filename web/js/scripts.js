@@ -12,14 +12,20 @@ $(document).ready(function(){
     var location_x = $('#current_x').val();
     var location_y = $('#current_y').val();
     var fuel = getFuelCost(coordinates[0], coordinates[1], location_x, location_y);
+    var current_fuel = $('#current_fuel').val();
     var planet_name = $(this).children('.planet_name').text();
     if (!planet_name) {
-        planet_name = "Unpopulated Space";
+        planet_name = "Empty Space";
     }
     $('#destination_name').text(planet_name);
     $('#destination_coordinates').text('(' + coordinates[0] + ", " + coordinates[1] + ') Requires ' + fuel + ' Fuel');
     $('#destination_x').val(coordinates[1]);
     $('#destination_y').val(coordinates[0]);
+    if (fuel > current_fuel) {
+      $('#go_travel').prop('disabled', true);
+    } else {
+      $('#go_travel').prop('disabled', false);      
+    }
   });
 
 });
