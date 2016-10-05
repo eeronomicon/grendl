@@ -372,6 +372,30 @@
             $this->assertEquals(0, $output8);
         }
 
+        function test_getName()
+        {
+            //Arrange
+            $x = 5;
+            $y = 6;
+            $type = 2;
+            $population = 1;
+            $specialty = 3;
+            $regular = 4;
+            $controlled = 5;
+            $name = 'test';
+            $test_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled);
+            $test_planet->save();
+            $test_output = $test_planet->getName();
+            $planets = Planet::getAll();
+
+            //Act
+            $output = $planets[0]->getName();
+
+
+            //Assert
+            $this->assertEquals($test_output, $output);
+        }
+
     }
         // export PATH=$PATH:./vendor/bin first and then you will only have to run  $ phpunit tests
 ?>

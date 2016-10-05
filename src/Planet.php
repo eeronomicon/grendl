@@ -9,8 +9,9 @@
         private $regular;
         private $controlled;
         private $id;
+        private $name;
 
-        function __construct($x, $y, $type, $population, $regular, $specialty, $controlled, $id = null)
+        function __construct($x, $y, $type, $population, $regular, $specialty, $controlled, $name = null, $id = null)
         {
             // based on population, specialty, and controlled, initial inventory levels will be set
             $this->x = $x;
@@ -21,11 +22,21 @@
             $this->regular = $regular;
             $this->controlled = $controlled;
             $this->id = $id;
+            if ($name == null && $type != 0) {
+                // set random name
+                $rando = mt_rand(1, 100);
+                $returned_names = $GLOBALS['DB']->query("SELECT name FROM planet_names WHERE id = {$rando};");
+                $name = $returned_names->fetch(PDO::FETCH_ASSOC);
+                $this->name = $name['name'];
+            } else {
+                $this->name = $name;
+            }
+
         }
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO planets (location_x, location_y, type, population, specialty, regular, controlled) VALUES ({$this->x}, {$this->y}, {$this->type}, {$this->population}, {$this->specialty}, {$this->regular}, {$this->controlled});");
+            $GLOBALS['DB']->exec("INSERT INTO planets (location_x, location_y, type, population, specialty, regular, controlled, name) VALUES ({$this->x}, {$this->y}, {$this->type}, {$this->population}, {$this->specialty}, {$this->regular}, {$this->controlled}, '{$this->name}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -313,7 +324,8 @@
                 $regular = $planet['regular'];
                 $controlled = $planet['controlled'];
                 $id = $planet['id'];
-                $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $id);
+                $name = $planet['name'];
+                $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $name, $id);
                 return $new_planet;
             }
         }
@@ -331,7 +343,8 @@
                 $regular = $planet['regular'];
                 $controlled = $planet['controlled'];
                 $id = $planet['id'];
-                $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $id);
+                $name = $planet['name'];
+                $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $name, $id);
                 array_push($planets, $new_planet);
             }
             return $planets;
@@ -356,7 +369,8 @@
                 $regular = $planet['regular'];
                 $controlled = $planet['controlled'];
                 $id = $planet['id'];
-                $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $id);
+                $name = $planet['name'];
+                $new_planet = new Planet($x, $y, $type, $population, $regular, $specialty, $controlled, $name, $id);
                 array_push($planets, $new_planet);
             }
             return $planets;
@@ -411,6 +425,11 @@
         function getId()
         {
             return $this->id;
+        }
+
+        function getName()
+        {
+            return $this->name;
         }
 
     }

@@ -82,13 +82,11 @@
             $test_system = new System();
             $planets = Planet::getAllOccupiedPlanets();
             $first_output = $planets[0]->getQuantities();
-            var_dump($first_output);
 
             // Act
             System::nextTurn();
             $planets = Planet::getAllOccupiedPlanets();
             $second_output = $planets[0]->getQuantities();
-            var_dump($second_output);
 
             // Assert
             $this->assertGreaterThan($first_output, $second_output);
