@@ -7,6 +7,17 @@ function getFuelCost(x1, y1, x2, y2) {
 // Front End Code
 $(document).ready(function(){
 
+  $('#to_space').click(function() {
+    if ($('#name').val()) {
+      var startGameSound = new Audio('/media/GRENDL04.ogg');
+      startGameSound.volume = 1.0;
+      startGameSound.play();
+      setTimeout(function() {
+        $('#ship_name').submit();
+      }, 2000);
+    }
+  });
+
   $('.planet-description').click(function() {
     var coordinates = $(this).attr('id').split('_');
     var location_x = $('#current_x').val();
