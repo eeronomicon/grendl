@@ -13,6 +13,7 @@
                         <p>Fuel Level</p>
                         <p>Cargo Level</p>
                         <p>Credits</p>
+                        <p>Turns</p>
                     </div>
                     <div class='col-xs-2 ship_info'>
                         <p>Balance</p>
@@ -20,6 +21,7 @@
                         <p>{{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
                         <p>{{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
                         <p>{{ ship.getCredits }}</p>
+                        <p>{{ ship.getTurn }}</p>
                     </div>
                 </div>
                 <br><br><br><br>
@@ -90,6 +92,7 @@
                             <p>Fuel Level</p>
                             <p>Cargo Level</p>
                             <p>Credits</p>
+                            <p>Turns</p>
                         </div>
                         <div class='col-xs-2 ship_info'>
                             <p>Balance</p>
@@ -97,13 +100,14 @@
                             <p>{{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
                             <p>{{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
                             <p>{{ ship.getCredits }}</p>
+                            <p>{{ ship.getTurn }}</p>
                         </div>
                 </div>
 
                 <h3>Planet Inventory:</h3>
                 <div class='row trade_row'>
                     <form action='/buy/{{ ship.getId }}' method='post' id='trade_buy'>
-                        <div class='col-xs-1 col-xs-offset-1'>
+                        <div class='col-xs-1 col-xs-offset-1 right'>
                             <p>Units</p>
                             <hr>
                             <p>{{ planet.getOreQuantity }}</p>
@@ -145,12 +149,10 @@
                     </form>
                 </div>
 
-
-
                 <h3>Ship Inventory:</h3>
                 <div class='row trade_row'>
                     <form action='/sell/{{ ship.getId }}' method='post' id='trade_sell'>
-                        <div class='col-xs-1 col-xs-offset-1'>
+                        <div class='col-xs-1 col-xs-offset-1 right'>
                             <p>Units</p>
                             <hr>
                             <p>{{ ship.getCargoManifest[0].getQuantity }}</p>

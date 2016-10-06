@@ -66,6 +66,23 @@
         return $app['twig']->render('gameover.html.twig', array('ship' => $ship, 'high_scores' => $high_scores));
     });
 
+    // wait one turn
+    $app->get('/wait_turn/{ship_id}', function($ship_id) use ($app) {
+        $ship = Ship::find($ship_id);
+        $location = $ship->getLocation();
+        $planet = Planet::findByCoordinates($location[1], $location[0]);
+        $ship->nextTurn();
+        $ship->travel($location[0], $location[1]);
+        $ship->update();
+        $planet->setMarketValues();
+        if($ship->checkGameover()) {
+            System::addHighScore($ship->getName(), $ship->getCredits(), $ship->getTurn());
+            return $app->redirect('/gameover/' . $ship->getId());
+        }
+        System::nextTurn();
+        return $app->redirect('/main_display/' . $ship->getId());
+    });
+
     // trade routes
     $app->get('/trade/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
