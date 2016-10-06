@@ -148,7 +148,7 @@
 
         function checkGameover()
         {
-            $current_planet = Planet::findByCoordinates($this->location_x, $this->location_y);
+            $current_planet = Planet::findByCoordinates($this->location_y, $this->location_x);
 
             // if turns has reached maximum turns
             if($this->turn >= System::getGameplayParameters()['max_turns']) {
@@ -312,7 +312,7 @@
 
         function cargoCheck($new_cargo_quantity)
         {
-            if (($this->getCargoCapacity() - $this->getCargoLoad()) <= $new_cargo_quantity) {
+            if (($this->getCargoCapacity() - $this->getCargoLoad()) < $new_cargo_quantity) {
                 return false;
             } else {
                 return true;
