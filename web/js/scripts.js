@@ -18,6 +18,24 @@ $(document).ready(function(){
     }
   });
 
+  $('#go_travel').click(function() {
+    var navigationSound = new Audio('/media/GRENDL02.ogg');
+    navigationSound.volume = 1.0;
+    navigationSound.play();
+    setTimeout(function() {
+      $('#navigation').submit();
+    }, 2000);
+  });
+
+  $('.trade-button').click(function() {
+    var navigationSound = new Audio('/media/GRENDL03.ogg');
+    navigationSound.volume = 1.0;
+    navigationSound.play();
+    setTimeout(function() {
+      $('.buy-sell').submit();
+    }, 1800);
+  });
+
   $('.planet-description').click(function() {
     var coordinates = $(this).attr('id').split('_');
     var location_x = $('#current_x').val();
@@ -34,6 +52,9 @@ $(document).ready(function(){
     $('#destination_y').val(coordinates[0]);
     if (fuel > current_fuel) {
       $('#go_travel').prop('disabled', true);
+      var navigationSound = new Audio('/media/GRENDL01.ogg');
+      navigationSound.volume = 1.0;
+      navigationSound.play();
     } else {
       $('#go_travel').prop('disabled', false);
     }
