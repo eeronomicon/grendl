@@ -168,7 +168,8 @@
             foreach ($returned_scores as $record) {
                 $name = $record['ship_name'];
                 $score = $record['score'];
-                $temp_array = array($name, $score);
+                $turn = $record['turn'];
+                $temp_array = array($name, $score, $turn);
                 array_push($high_scores, $temp_array);
                 if ($index == 10) {
                     return $high_scores;
@@ -176,6 +177,11 @@
                 $index++;
             }
             return $high_scores;
+        }
+
+        static function addHighScore($ship_name, $score, $turn)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO high_scores (ship_name, score, turn) VALUES ('{$ship_name}', {$score}, {$turn});");
         }
     }
  ?>
