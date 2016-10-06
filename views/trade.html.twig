@@ -23,7 +23,7 @@
                         <p>Balance</p>
                         <hr>
                         <p>{{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
-                        <p>{{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
+                        <p><span id='cargo_load'>{{ ship.getCargoLoad }}</span>/<span id='cargo_capacity'>{{ ship.getCargoCapacity }}</span></p>
                         <p>{{ ship.getCredits }}</p>
                         <p>{{ ship.getTurn }}</p>
                     </div>
@@ -69,10 +69,10 @@
                         <div class='col-xs-1'>
                             <p>Value</p>
                             <hr>
-                            <p>{{ planet.getOrePrice }}</p>
-                            <p>{{ planet.getGrainPrice }}</p>
-                            <p>{{ planet.getLivestockPrice }}</p>
-                            <p>{{ planet.getConsumablesPrice }}</p>
+                            <p id='Ore_price'>{{ planet.getOrePrice }}</p>
+                            <p id='Grain_price'>{{ planet.getGrainPrice }}</p>
+                            <p id='Livestock_price'>{{ planet.getLivestockPrice }}</p>
+                            <p id='Consumables_price'>{{ planet.getConsumablesPrice }}</p>
                         </div>
                         <div class='col-xs-3 right'>
                             <p>Industrial Items</p>
@@ -85,10 +85,10 @@
                         <div class='col-xs-1'>
                             <p>Value</p>
                             <hr>
-                            <p>{{ planet.getConsumerGoodsPrice }}</p>
-                            <p>{{ planet.getHeavyMachineryPrice }}</p>
-                            <p>{{ planet.getMilitaryHardwarePrice }}</p>
-                            <p>{{ planet.getRobotsPrice }}</p>
+                            <p id='Consumer_Goods_price'>{{ planet.getConsumerGoodsPrice }}</p>
+                            <p id='Heavy_Machinery_price'>{{ planet.getHeavyMachineryPrice }}</p>
+                            <p id='Military_Hardware_price'>{{ planet.getMilitaryHardwarePrice }}</p>
+                            <p id='Robots_price'>{{ planet.getRobotsPrice }}</p>
                         </div>
                         <div class='col-xs-2 right ship_info'>
                             <p>Category</p>
@@ -102,8 +102,8 @@
                             <p>Balance</p>
                             <hr>
                             <p>{{ ship.getCurrentFuel }}/{{ ship.getFuelCapacity }}</p>
-                            <p>{{ ship.getCargoLoad }}/{{ ship.getCargoCapacity }}</p>
-                            <p>{{ ship.getCredits }}</p>
+                            <p><span id='cargo_load'>{{ ship.getCargoLoad }}</span>/<span id='cargo_capacity'>{{ ship.getCargoCapacity }}</span></p>
+                            <p id='bank'>{{ ship.getCredits }}</p>
                             <p>{{ ship.getTurn }}</p>
                         </div>
                 </div>
@@ -111,19 +111,7 @@
                 <h3>Planet Inventory:</h3>
                 <div class='row trade_row'>
                     <form action='/buy/{{ ship.getId }}' method='post' id='trade_buy'>
-                        <div class='col-xs-1 col-xs-offset-1 right'>
-                            <p>Units</p>
-                            <hr>
-                            <p>{{ planet.getOreQuantity }}</p>
-                            <p>{{ planet.getGrainQuantity }}</p>
-                            <p>{{ planet.getLivestockQuantity }}</p>
-                            <p>{{ planet.getConsumablesQuantity }}</p>
-                            <p>{{ planet.getConsumerGoodsQuantity }}</p>
-                            <p>{{ planet.getHeavyMachineryQuantity }}</p>
-                            <p>{{ planet.getMilitaryHardwareQuantity }}</p>
-                            <p>{{ planet.getRobotsQuantity }}</p>
-                        </div>
-                        <div class='col-xs-3 col-xs-offset-1'>
+                        <div class='col-xs-3 col-xs-offset-1 right'>
                             <p>Item</p>
                             <hr>
                             <p>Ore</p>
@@ -135,30 +123,42 @@
                             <p>Military Hardware</p>
                             <p>Robots</p>
                         </div>
+                        <div class='col-xs-1 col-xs-offset-1 right'>
+                            <p>Units</p>
+                            <hr>
+                            <p id='Ore_planet_quantity'>{{ planet.getOreQuantity }}</p>
+                            <p id='Grain_planet_quantity'>{{ planet.getGrainQuantity }}</p>
+                            <p id='Livestock_planet_quantity'>{{ planet.getLivestockQuantity }}</p>
+                            <p id='Consumables_planet_quantity'>{{ planet.getConsumablesQuantity }}</p>
+                            <p id='Consumer_Goods_planet_quantity'>{{ planet.getConsumerGoodsQuantity }}</p>
+                            <p id='Heavy_Machinery_planet_quantity'>{{ planet.getHeavyMachineryQuantity }}</p>
+                            <p id='Military_Hardware_planet_quantity'>{{ planet.getMilitaryHardwareQuantity }}</p>
+                            <p id='Robots_planet_quantity'>{{ planet.getRobotsQuantity }}</p>
+                        </div>
                         <div class='col-xs-1 col-xs-offset-1'>
                             <p>Buy</p>
                             <hr>
-                            <p><input id='Ore_buy_input' class='trade_input' name='Ore' type='number' placeholder='0' min='0' max='{{ planet.getOreQuantity }}'></p>
-                            <p><input class='trade_input' name='Grain' type='number' placeholder='0' min='0' max='{{ planet.getGrainQuantity }}'></p>
-                            <p><input class='trade_input' name='Livestock' type='number' placeholder='0' min='0' max='{{ planet.getLivestockQuantity }}'></p>
-                            <p><input class='trade_input' name='Consumables' type='number' placeholder='0' min='0' max='{{ planet.getConsumablesQuantity }}'></p>
-                            <p><input class='trade_input' name='Consumer_Goods' type='number' placeholder='0' min='0' max='{{ planet.getConsumerGoodsQuantity }}'></p>
-                            <p><input class='trade_input' name='Heavy_Machinery' type='number' placeholder='0' min='0' max='{{ planet.getHeavyMachineryQuantity }}'></p>
-                            <p><input class='trade_input' name='Military_Hardware' type='number' placeholder='0' min='0' max='{{ planet.getMilitaryHardwareQuantity }}'></p>
-                            <p><input class='trade_input' name='Robots' type='number' min='0' placeholder='0' max='{{ planet.getRobotsQuantity }}'></p>
+                            <p><input id='Ore_buy_input' class='trade_input' name='Ore' type='number' value='0' min='0' max='{{ planet.getOreQuantity }}'></p>
+                            <p><input id='Grain_buy_input' class='trade_input' name='Grain' type='number' value='0' min='0' max='{{ planet.getGrainQuantity }}'></p>
+                            <p><input id='Livestock_buy_input' class='trade_input' name='Livestock' type='number' value='0' min='0' max='{{ planet.getLivestockQuantity }}'></p>
+                            <p><input id='Consumables_buy_input' class='trade_input' name='Consumables' type='number' value='0' min='0' max='{{ planet.getConsumablesQuantity }}'></p>
+                            <p><input id='Consumer_Goods_buy_input' class='trade_input' name='Consumer_Goods' type='number' value='0' min='0' max='{{ planet.getConsumerGoodsQuantity }}'></p>
+                            <p><input id='Heavy_Machinery_buy_input' class='trade_input' name='Heavy_Machinery' type='number' value='0' min='0' max='{{ planet.getHeavyMachineryQuantity }}'></p>
+                            <p><input id='Military_Hardware_buy_input' class='trade_input' name='Military_Hardware' type='number' value='0' min='0' max='{{ planet.getMilitaryHardwareQuantity }}'></p>
+                            <p><input id='Robots_buy_input' class='trade_input' name='Robots' type='number' min='0' value='0' max='{{ planet.getRobotsQuantity }}'></p>
                         </div>
                         <div class='col-xs-1'>
                             <!-- put value calculations here -->
                             <p class='black_text'>Values</p>
                             <hr class='black_text'>
-                            <p class='Ore_buy_price'>0</p>
-                            <p class='Grain_buy_price'>0</p>
-                            <p class='Livestock_buy_price'>0</p>
-                            <p class='Consumables_buy_price'>0</p>
-                            <p class='Consumer_Goods_buy_price'>0</p>
-                            <p class='Heavy_Machinery_buy_price'>0</p>
-                            <p class='Military_Hardware_buy_price'>0</p>
-                            <p class='Robots_buy_price'>0</p>
+                            <p class='black_text'>-<span id='Ore_buy_price'>0</span></p>
+                            <p class='black_text'>-<span id='Grain_buy_price'>0</span></p>
+                            <p class='black_text'>-<span id='Livestock_buy_price'>0</span></p>
+                            <p class='black_text'>-<span id='Consumables_buy_price'>0</span></p>
+                            <p class='black_text'>-<span id='Consumer_Goods_buy_price'>0</span></p>
+                            <p class='black_text'>-<span id='Heavy_Machinery_buy_price'>0</span></p>
+                            <p class='black_text'>-<span id='Military_Hardware_buy_price'>0</span></p>
+                            <p class='black_text'>-<span id='Robots_buy_price'>0</span></p>
                         </div>
                         <div class='col-xs-2'>
                             <button class='btn form-control fill btn-danger trade-button' type='button' id='button_buy'>BUY</button>
@@ -169,19 +169,8 @@
                 <h3>Ship Inventory:</h3>
                 <div class='row trade_row'>
                     <form action='/sell/{{ ship.getId }}' method='post' id='trade_sell'>
-                        <div class='col-xs-1 col-xs-offset-1 right'>
-                            <p>Units</p>
-                            <hr>
-                            <p>{{ ship.getCargoManifest[0].getQuantity }}</p>
-                            <p>{{ ship.getCargoManifest[1].getQuantity }}</p>
-                            <p>{{ ship.getCargoManifest[2].getQuantity }}</p>
-                            <p>{{ ship.getCargoManifest[3].getQuantity }}</p>
-                            <p>{{ ship.getCargoManifest[4].getQuantity }}</p>
-                            <p>{{ ship.getCargoManifest[5].getQuantity }}</p>
-                            <p>{{ ship.getCargoManifest[6].getQuantity }}</p>
-                            <p>{{ ship.getCargoManifest[7].getQuantity }}</p>
-                        </div>
-                        <div class='col-xs-3 col-xs-offset-1'>
+
+                        <div class='col-xs-3 col-xs-offset-1 right'>
                             <p>Item</p>
                             <hr>
                             <p>Ore</p>
@@ -193,30 +182,42 @@
                             <p>Military Hardware</p>
                             <p>Robots</p>
                         </div>
+                        <div class='col-xs-1 col-xs-offset-1 right'>
+                            <p>Units</p>
+                            <hr>
+                            <p id='Ore_ship_quantity'>{{ ship.getCargoManifest[0].getQuantity }}</p>
+                            <p id='Grain_ship_quantity'>{{ ship.getCargoManifest[1].getQuantity }}</p>
+                            <p id='Livestock_ship_quantity'>{{ ship.getCargoManifest[2].getQuantity }}</p>
+                            <p id='Consumables_ship_quantity'>{{ ship.getCargoManifest[3].getQuantity }}</p>
+                            <p id='Consumer_Goods_ship_quantity'>{{ ship.getCargoManifest[4].getQuantity }}</p>
+                            <p id='Heavy_Machinery_ship_quantity'>{{ ship.getCargoManifest[5].getQuantity }}</p>
+                            <p id='Military_Hardware_ship_quantity'>{{ ship.getCargoManifest[6].getQuantity }}</p>
+                            <p id='Robots_ship_quantity'>{{ ship.getCargoManifest[7].getQuantity }}</p>
+                        </div>
                         <div class='col-xs-1 col-xs-offset-1'>
                             <p>Sell</p>
                             <hr>
-                            <p><input class='trade_input' name='Ore' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[0].getQuantity }}'></p>
-                            <p><input class='trade_input' name='Grain' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[1].getQuantity }}'></p>
-                            <p><input class='trade_input' name='Livestock' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[2].getQuantity }}'></p>
-                            <p><input class='trade_input' name='Consumables' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[3].getQuantity }}'></p>
-                            <p><input class='trade_input' name='Consumer_Goods' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[4].getQuantity }}'></p>
-                            <p><input class='trade_input' name='Heavy_Machinery' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[5].getQuantity }}'></p>
-                            <p><input class='trade_input' name='Military_Hardware' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[6].getQuantity }}'></p>
-                            <p><input class='trade_input' name='Robots' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[7].getQuantity }}'></p>
+                            <p><input id='Ore_sell_input' class='trade_input' name='Ore' type='number' value='0' min='0' max='{{ ship.getCargoManifest[0].getQuantity }}'></p>
+                            <p><input id='Grain_sell_input' class='trade_input' name='Grain' type='number' value='0' min='0' max='{{ ship.getCargoManifest[1].getQuantity }}'></p>
+                            <p><input id='Livestock_sell_input' class='trade_input' name='Livestock' type='number' value='0' min='0' max='{{ ship.getCargoManifest[2].getQuantity }}'></p>
+                            <p><input id='Consumables_sell_input' class='trade_input' name='Consumables' type='number' value='0' min='0' max='{{ ship.getCargoManifest[3].getQuantity }}'></p>
+                            <p><input id='Consumer_Goods_sell_input' class='trade_input' name='Consumer_Goods' type='number' value='0' min='0' max='{{ ship.getCargoManifest[4].getQuantity }}'></p>
+                            <p><input id='Heavy_Machinery_sell_input' class='trade_input' name='Heavy_Machinery' type='number' value='0' min='0' max='{{ ship.getCargoManifest[5].getQuantity }}'></p>
+                            <p><input id='Military_Hardware_sell_input' class='trade_input' name='Military_Hardware' type='number' value='0' min='0' max='{{ ship.getCargoManifest[6].getQuantity }}'></p>
+                            <p><input id='Robots_sell_input' class='trade_input' name='Robots' type='number' value='0' min='0' max='{{ ship.getCargoManifest[7].getQuantity }}'></p>
                         </div>
                         <div class='col-xs-1'>
                             <!-- put value calculations here -->
                             <p class='black_text'>Values</p>
                             <hr class='black_text'>
-                            <p class='Ore_sale_price'>0</p>
-                            <p class='Grain_sale_price'>0</p>
-                            <p class='Livestock_sale_price'>0</p>
-                            <p class='Consumables_sale_price'>0</p>
-                            <p class='Consumer_Goods_sale_price'>0</p>
-                            <p class='Heavy_Machinery_sale_price'>0</p>
-                            <p class='Military_Hardware_sale_price'>0</p>
-                            <p class='Robots_sale_price'>0</p>
+                            <p class='black_text'>+<span id='Ore_sale_price'>0</span></p>
+                            <p class='black_text'>+<span id='Grain_sale_price'>0</span></p>
+                            <p class='black_text'>+<span id='Livestock_sale_price'>0</span></p>
+                            <p class='black_text'>+<span id='Consumables_sale_price'>0</span></p>
+                            <p class='black_text'>+<span id='Consumer_Goods_sale_price'>0</span></p>
+                            <p class='black_text'>+<span id='Heavy_Machinery_sale_price'>0</span></p>
+                            <p class='black_text'>+<span id='Military_Hardware_sale_price'>0</span></p>
+                            <p class='black_text'>+<span id='Robots_sale_price'>0</span></p>
                         </div>
                         <div class='col-xs-2'>
                             <button class='btn form-control fill btn-info trade-button' type='button' id='button_sell'>SELL</button>
