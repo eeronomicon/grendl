@@ -6,8 +6,12 @@
 
     $app->post("/navigation/{ship_id}/go", function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
+        $ship->nextTurn();
         $ship->travel($_POST['destination_x'], $_POST['destination_y']);
         $ship->update();
+        if($ship->checkGameover()) {
+            return $app->redirect('/gameover/' . $ship->getId());
+        }
         $location = $ship->getLocation();
         $planet = Planet::findByCoordinates($location[1], $location[0]);
         System::nextTurn();

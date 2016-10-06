@@ -46,7 +46,7 @@
         // $location_y = 1;
         // $current_fuel = 100;
         $parameters = System::getGameplayParameters();
-        $ship = new Ship($name, $parameters['max_cargo'], $parameters['max_fuel'], $parameters['starting_credits'], $parameters['starting_x'], $parameters['starting_y'], $parameters['starting_fuel'], $id = null);
+        $ship = new Ship($name, $parameters['max_cargo'], $parameters['max_fuel'], $parameters['starting_credits'], $parameters['starting_x'], $parameters['starting_y'], $parameters['starting_fuel'], $turn = 1, $id = null);
         $ship->save();
         $ship->initializeCargo();
         return $app->redirect('/main_display/' . $ship->getId());
@@ -57,6 +57,13 @@
         $location = $ship->getLocation();
         $planet = Planet::findByCoordinates($location[1], $location[0]);
         return $app['twig']->render('main_display.html.twig', array('ship' => $ship, 'planet' => $planet));
+    });
+
+    // game over
+    $app->get('/gameover/{ship_id}', function($ship_id) use ($app) {
+        $ship = Ship::find($ship_id);
+        $high_scores = System::getTopScores();
+        return $app['twig']->render('gameover.html.twig', array('ship' => $ship, 'high_scores' => $high_scores));
     });
 
     // trade routes

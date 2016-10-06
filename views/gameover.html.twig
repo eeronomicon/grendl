@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class='container'>
+            <h1 class="header-copy"><img class="header-icon" src="/img/spacetrucker2.png"> GAME OVER <img class="header-icon" src="/img/spacetrucker.png"></h1>
+            <hr>
+            <br><br><br><br><br>
+            <div class='row'>
+                <div class='col-xs-6'>
+                    <h3>{{ ship.getName }}</h3>
+                    <p class='indent'>You survived the brutalities of Space Truckin for {{ ship.getTurn }} years, and you earned {{ ship.getCredits }} credits. Congratulations?!?!?!?</p>
+                </div>
+                <div class='col-xs-6'>
+                    <h3>High Scores</h3>
+                    <div class='row'>
+                        <div class='col-xs-4 col-xs-offset-2 right'>
+                            <p>Score</p>
+                            <hr>
+                            {% for score in high_scores %}
+                                <p>{{ score[1] }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class='col-xs-4'>
+                            <p>Ship Name</p>
+                            <hr>
+                            {% for score in high_scores %}
+                                <p>{{ score[0] }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br><br><br><br><br><br><br><br><br><br>
+            <hr>
+            <h3>Try Again:</h3>
+            <br><br><br><br>
+            <form action="/new_game" method="post">
+                <input class='form-control start_input' type="text" name="name" required placeholder="ENTER SHIP NAME">
+                <br><br><br><br>
+                <button class='form-control btn btn-danger start_button' type="submit">To Space!</button>
+            </form>
+            <hr>
+            <h5 class="footer-copy">GRENDL: General Robotics Engineering Navigation &amp; Direction Logic</h5>
+        </div>
+    </body>
+</html>

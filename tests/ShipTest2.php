@@ -33,7 +33,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $test_ship->initializeCargo();
             $ship_inventory = array(
@@ -71,7 +71,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $test_ship->initializeCargo();
             $ship_inventory = array(
