@@ -31,8 +31,13 @@ $(document).ready(function(){
     var navigationSound = new Audio('/media/GRENDL03.ogg');
     navigationSound.volume = 1.0;
     navigationSound.play();
+    if ($(this).attr('id') == 'button_buy') {
+      var formName = '#trade_buy';
+    } else {
+      var formName = '#trade_sell';
+    }
     setTimeout(function() {
-      $('.buy-sell').submit();
+      $(formName).submit();
     }, 1800);
   });
 

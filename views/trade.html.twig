@@ -102,7 +102,7 @@
 
                 <h3>Planet Inventory:</h3>
                 <div class='row trade_row'>
-                    <form action='/buy/{{ ship.getId }}' method='post' class='buy-sell'>
+                    <form action='/buy/{{ ship.getId }}' method='post' id='trade_buy'>
                         <div class='col-xs-1 col-xs-offset-1'>
                             <p>Units</p>
                             <hr>
@@ -140,7 +140,7 @@
                             <p><input class='trade_input' name='Robots' type='number' min='0' placeholder='0' max='{{ planet.getRobotsQuantity }}'></p>
                         </div>
                         <div class='col-xs-2 col-xs-offset-1'>
-                            <button class='btn form-control fill btn-danger trade-button' type='button'>BUY</button>
+                            <button class='btn form-control fill btn-danger trade-button' type='button' id='button_buy'>BUY</button>
                         </div>
                     </form>
                 </div>
@@ -149,7 +149,7 @@
 
                 <h3>Ship Inventory:</h3>
                 <div class='row trade_row'>
-                    <form action='/sell/{{ ship.getId }}' method='post' >
+                    <form action='/sell/{{ ship.getId }}' method='post' id='trade_sell'>
                         <div class='col-xs-1 col-xs-offset-1'>
                             <p>Units</p>
                             <hr>
@@ -187,7 +187,7 @@
                             <p><input class='trade_input' name='Robots' type='number' placeholder='0' min='0' max='{{ ship.getCargoManifest[7].getQuantity }}'></p>
                         </div>
                         <div class='col-xs-2 col-xs-offset-1'>
-                            <button class='btn form-control fill btn-info trade-button' type='button'>SELL</button>
+                            <button class='btn form-control fill btn-info trade-button' type='button' id='button_sell'>SELL</button>
                         </div>
                     </form>
                 </div>
