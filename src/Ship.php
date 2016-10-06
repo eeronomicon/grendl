@@ -159,7 +159,7 @@
                 return true;
             }
             // if stranded without fuel or means to buy fuel
-            if ($current_planet->getType != 3 && $this->current_fuel < 10) {
+            if ($current_planet->getType() != 3 && $this->current_fuel < 10) {
                 return true;
             }
             return false;
@@ -225,8 +225,8 @@
             if ($this->checkTravelRange($destination_x, $destination_y)) {
                 $distance = $this->getDistance($destination_x, $destination_y);
                 $this->setLocation($destination_x, $destination_y);
-                $this->current_fuel -= $distance * 10;
-                $this->credits -= 2000;
+                $this->current_fuel -= $distance * System::getGameplayParameters()['travel_cost'];
+                $this->credits -= System::getGameplayParameters()['upkeep_cost'];
             } else {
                 return;
             }
