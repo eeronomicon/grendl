@@ -55,6 +55,8 @@ $(document).ready(function(){
     $('#destination_coordinates').text('(' + coordinates[0] + ", " + coordinates[1] + ') Requires ' + fuel + ' Fuel');
     $('#destination_x').val(coordinates[1]);
     $('#destination_y').val(coordinates[0]);
+    $('.planet-description').removeClass('planet-selected');
+    $(this).addClass('planet-selected');
     if (fuel > current_fuel) {
       $('#go_travel').prop('disabled', true);
       var navigationSound = new Audio('/media/GRENDL01.ogg');

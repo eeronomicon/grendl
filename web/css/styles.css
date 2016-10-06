@@ -22,6 +22,10 @@ body {
   background-color: #666;
 }
 
+.planet-selected {
+  background-color: #473B00;
+}
+
 .you-are-here {
   color: orange;
 }
