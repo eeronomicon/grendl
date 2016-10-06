@@ -1,7 +1,6 @@
 
 
 $(document).ready(function() {
-    // alert('hi');
 
     var resource_names = new Array('Ore', 'Grain', 'Livestock', 'Consumables', 'Heavy_Machinery', 'Consumer_Goods', 'Military_Hardware', 'Robots');
     resource_names.forEach(function(name) {
@@ -55,6 +54,7 @@ $(document).ready(function() {
 
         $('#' + name + '_buy_input').click('input', function() {
             var max_quantity = parseInt($('#' + name + '_planet_quantity').text());
+            console.log(max_quantity);
             $(this).val(max_quantity);
             $(this).val(checkCargoSpace($(this).val()));
             $(this).val(creditCheck($('#' + name + '_price').text(), $(this).val()));
@@ -124,7 +124,7 @@ $(document).ready(function() {
 
         var total_cost = ore_cost + grain_cost + livestock_cost + consumables_cost + consumer_goods_cost + heavy_machinery_cost + military_hardware_cost + robots_cost;
 
-        if (available_credits <= total_cost) {
+        if (available_credits >= total_cost) {
             return quantity;
         } else {
             var credits_to_cut = total_cost - available_credits;
