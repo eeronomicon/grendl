@@ -159,5 +159,23 @@
             }
             return $parameters;
         }
+
+        static function getTopScores()
+        {
+            $returned_scores = $GLOBALS['DB']->query("SELECT * FROM high_scores ORDER BY score DESC;");
+            $high_scores = array();
+            $index = 1;
+            foreach ($returned_scores as $record) {
+                $name = $record['ship_name'];
+                $score = $record['score'];
+                $temp_array = array($name, $score);
+                array_push($high_scores, $temp_array);
+                if ($index == 10) {
+                    return $high_scores;
+                }
+                $index++;
+            }
+            return $high_scores;
+        }
     }
  ?>

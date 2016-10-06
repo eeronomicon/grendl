@@ -8,9 +8,10 @@
         private $location_x;
         private $location_y;
         private $current_fuel;
+        private $turn;
         private $id;
 
-        function __construct($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id = null)
+        function __construct($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn, $id = null)
         {
             $this->name = $name;
             $this->cargo_capacity = $cargo_capacity;
@@ -19,7 +20,13 @@
             $this->location_x = $location_x;
             $this->location_y = $location_y;
             $this->current_fuel = $current_fuel;
+            $this->turn = $turn;
             $this->id = $id;
+        }
+
+        function getTurn()
+        {
+            return $this->turn;
         }
 
         function getId()
@@ -98,7 +105,8 @@
             credits,
             location_x,
             location_y,
-            current_fuel
+            current_fuel,
+            turn
           ) VALUES (
             '{$this->getName()}',
             {$this->getCargoCapacity()},
@@ -106,7 +114,8 @@
             {$this->getCredits()},
             {$this->getLocation()[0]},
             {$this->getLocation()[1]},
-            {$this->getCurrentFuel()}
+            {$this->getCurrentFuel()},
+            {$this->getTurn()}
           );");
           $this->id = $GLOBALS['DB']->lastInsertId();
         }
@@ -124,7 +133,8 @@
                 $location_x = $ship['location_x'];
                 $location_y = $ship['location_y'];
                 $current_fuel = $ship['current_fuel'];
-                $new_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+                $turn = $ship['turn'];
+                $new_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn, $id);
                 array_push($ships, $new_ship);
             }
             return $ships;
@@ -134,6 +144,30 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM ship;");
             $GLOBALS['DB']->exec("DELETE FROM cargo;");
+        }
+
+        function checkGameover()
+        {
+            $current_planet = Planet::findByCoordinates($this->location_x, $this->location_y);
+
+            // if turns has reached maximum turns
+            if($this->turn >= System::getGameplayParameters()['max_turns']) {
+                return true;
+            }
+            // if out of credits and cargo
+            if ($this->credits <= 0 && $this->getCargoLoad() <= 0) {
+                return true;
+            }
+            // if stranded without fuel or means to buy fuel
+            if ($current_planet->getType != 3 && $this->current_fuel < 10) {
+                return true;
+            }
+            return false;
+        }
+
+        function nextTurn()
+        {
+            $this->turn++;
         }
 
         static function find($search_id)
@@ -158,7 +192,8 @@
             credits = {$this->getCredits()},
             location_x = {$this->getLocation()[0]},
             location_y = {$this->getLocation()[1]},
-            current_fuel = {$this->getCurrentFuel()}
+            current_fuel = {$this->getCurrentFuel()},
+            turn = {$this->getTurn()}
             WHERE id = {$this->getId()};");
         }
 

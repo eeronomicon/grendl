@@ -33,7 +33,7 @@
             $location_y = 0;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             // Act
             $result = $test_ship->getId();
             // Assert
@@ -51,7 +51,7 @@
             $location_y = 0;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             // Act
             $result = $test_ship->getName();
             // Assert
@@ -69,7 +69,7 @@
             $location_y = 0;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             // Act
             $result = $test_ship->getCargoCapacity();
             // Assert
@@ -87,7 +87,7 @@
             $location_y = 0;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             // Act
             $result = $test_ship->getFuelCapacity();
             // Assert
@@ -105,7 +105,7 @@
             $location_y = 0;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             // Act
             $result = $test_ship->getCredits();
             // Assert
@@ -123,7 +123,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             // Act
             $result = $test_ship->getLocation();
             // Assert
@@ -141,7 +141,7 @@
             $location_y = 0;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             // Act
             $result = $test_ship->getCurrentFuel();
             // Assert
@@ -159,7 +159,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $new_value = 6;
             // Act
             $test_ship->setId($new_value);
@@ -179,7 +179,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $new_value = "Grendel";
             // Act
             $test_ship->setName($new_value);
@@ -199,7 +199,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $new_value1 = 30;
             $new_value2 = 70;
             // Act
@@ -220,7 +220,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $new_value = 60000;
             // Act
             $test_ship->setCredits($new_value);
@@ -240,7 +240,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $new_value_x = 6;
             $new_value_y = 3;
             // Act
@@ -261,7 +261,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $new_value = 30;
             // Act
             $test_ship->setCurrentFuel($new_value);
@@ -281,7 +281,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             // Act
             $result = Ship::getAll();
@@ -311,7 +311,7 @@
             $location_y = 2;
             $current_fuel = 30;
             $id = 2;
-            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship2->save();
             // Act
             $result = Ship::getAll();
@@ -331,7 +331,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = null;
-            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship1->save();
             $name = "Grendel";
             $cargo_capacity = 30;
@@ -340,7 +340,8 @@
             $location_x = 1;
             $location_y = 2;
             $current_fuel = 30;
-            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship2->save();
+            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
+            $test_ship2->save();
             // Act
             Ship::deleteAll();
             // Assert
@@ -359,7 +360,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = null;
-            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship1->save();
             $name = "Grendel";
             $cargo_capacity = 30;
@@ -368,7 +369,7 @@
             $location_x = 1;
             $location_y = 2;
             $current_fuel = 30;
-            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship2->save();
             // Act
             $result = Ship::find($test_ship1->getId());
@@ -388,7 +389,7 @@
             $location_y = 3;
             $current_fuel = 20;
             $id = null;
-            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship1->save();
             $name = "Grendel";
             $cargo_capacity = 30;
@@ -397,7 +398,8 @@
             $location_x = 1;
             $location_y = 2;
             $current_fuel = 30;
-            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship2->save();
+            $test_ship2 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
+            $test_ship2->save();
             // Act
             $test_ship1->delete();
             $result = Ship::getAll();
@@ -416,7 +418,7 @@
             $location_x = 2;
             $location_y = 3;
             $current_fuel = 20;
-            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship1 = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship1->save();
             $test_ship1->setName("Grendel");
             $test_ship1->setCapacities(30, 70);
@@ -441,7 +443,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $destination_x = 4;
             $destination_y = 1;
@@ -463,7 +465,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $destination_x = 4;
             $destination_y = 1;
@@ -484,7 +486,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $destination_x = 4;
             $destination_y = 1;
@@ -510,7 +512,8 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
+            $test_ship->save();
             $destination_x = 2;
             $destination_y = 3;
             $destination_fuel = 30;
@@ -535,7 +538,8 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
+            $test_ship->save();
             $fuel_price = 100;
             $fuel_purchase_amount = 10;
             // Act
@@ -555,7 +559,8 @@
             $location_y = 3;
             $current_fuel = 40;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
+            $test_ship->save();
             $fuel_price = 100;
             $fuel_purchase_amount = 10;
             // Act
@@ -575,7 +580,8 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);            $test_ship->save();
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
+            $test_ship->save();
             $fuel_price = 100;
             $fuel_purchase_amount = 10;
             $new_credit_balance = $credits - ($fuel_price * $fuel_purchase_amount);
@@ -598,7 +604,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $ship_inventory = array(
                 ["Ore", 0],
@@ -632,7 +638,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $tradegood = "Robots";
             $unit_price = 1000;
@@ -654,7 +660,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $test_ship->initializeCargo();
             $cargo_type = "Robots";
@@ -676,7 +682,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $test_ship->initializeCargo();
             $cargo_type = "Robots";
@@ -700,7 +706,7 @@
             $location_y = 3;
             $current_fuel = 30;
             $id = 1;
-            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $id);
+            $test_ship = new Ship($name, $cargo_capacity, $fuel_capacity, $credits, $location_x, $location_y, $current_fuel, $turn = 1, $id);
             $test_ship->save();
             $test_ship->initializeCargo();
             $ship_inventory = array(
