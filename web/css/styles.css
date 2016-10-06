@@ -112,3 +112,16 @@ body {
 .fuel_btn {
     height: 100px;
 }
+
+.black_text {
+    color: black;
+    border: 1px solid black;
+}
+
+.green_text {
+    color: green;
+}
+
+.red_text {
+    color: red;
+}
