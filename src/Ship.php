@@ -152,17 +152,17 @@
 
             // if turns has reached maximum turns
             if($this->turn >= System::getGameplayParameters()['max_turns']) {
-                return true;
+                return 1;
             }
             // if out of credits and cargo
             if ($this->credits <= 0 && $this->getCargoLoad() <= 0) {
-                return true;
+                return 2;
             }
             // if stranded without fuel or means to buy fuel
             if ($current_planet->getType() != 3 && $this->current_fuel < 10) {
-                return true;
+                return 3;
             }
-            return false;
+            return 0;
         }
 
         function nextTurn()

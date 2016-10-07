@@ -9,7 +9,7 @@
         $ship->nextTurn();
         $ship->travel($_POST['destination_x'], $_POST['destination_y']);
         $ship->update();
-        if($ship->checkGameover()) {
+        if($game_over = $ship->checkGameover() != 0) {
             System::addHighScore($ship->getName(), $ship->getCredits(), $ship->getTurn());
             return $app->redirect('/gameover/' . $ship->getId());
         }

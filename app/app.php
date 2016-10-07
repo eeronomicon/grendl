@@ -63,7 +63,8 @@
     $app->get('/gameover/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
         $high_scores = System::getTopScores();
-        return $app['twig']->render('gameover.html.twig', array('ship' => $ship, 'high_scores' => $high_scores));
+        $game_over_reason = $ship->checkGameover();
+        return $app['twig']->render('gameover.html.twig', array('ship' => $ship, 'high_scores' => $high_scores, 'reason' => $game_over_reason));
     });
 
     // wait one turn
