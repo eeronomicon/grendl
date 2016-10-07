@@ -15,15 +15,25 @@
                 <div class='col-xs-6'>
                     <h3>{{ ship.getName }}</h3>
                     {% if reason == 1 %}
-                    <p class='indent'>After many Turns of traveling and trading, you've grown tired of life among the stars. You've decided to retire and settle down on some quiet, backwater asteroid.</p>
+                    <p>After many Turns of traveling and trading, you've grown tired of life among the stars. You've decided to retire and settle down on some quiet, backwater asteroid.</p>
                     {% elseif reason == 2 %}
                     <audio src="/media/GRENDL06.ogg" autoplay></audio>
-                    <p class='indent'>Ooh, bad luck, Captain. You've run out of Credits!</p>
+                    <p>Ooh, bad luck, Captain. You've run out of Credits!</p>
                     {% else %}
                     <audio src="/media/GRENDL05.ogg" autoplay></audio>
-                    <p class='indent'>Ooh, bad luck, Captain. You're out of Fuel!</p>
+                    <p>Ooh, bad luck, Captain. You're out of Fuel!</p>
                     {% endif %}
-                    <p class='indent'>You survived the vagaries of interstellar trade for {{ ship.getTurn }} Turns, and your Credit Balance is {{ ship.getCredits }}. Well done!</p>
+                    <p>You survived the vagaries of interstellar trade for {{ ship.getTurn }} Turns, and your Credit Balance is {{ ship.getCredits }}. Well done!</p>
+                    <br>
+                    <h3>Credits</h3>
+                    <p>Ryan Apking</p>
+                    <p>Stephen Burden</p>
+                    <p>HK Kahng</p>
+                    <p>Jon Toler</p>
+                    <br>
+                    <p>Groovy Alien Mudflap Silhouette by<br>Garrett Price</p>
+                    <br>
+                    <p>Opening and Closing Themes, Voice of GRENDL:<br>Nancy Novotny</p>
                 </div>
                 <div class='col-xs-6'>
                     <h3>High Scores</h3>
