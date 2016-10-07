@@ -171,7 +171,7 @@
                 $turn = $record['turn'];
                 $temp_array = array($name, $score, $turn);
                 array_push($high_scores, $temp_array);
-                if ($index == 10) {
+                if ($index == 18) {
                     return $high_scores;
                 }
                 $index++;
