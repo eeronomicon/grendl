@@ -13,18 +13,25 @@
 
     Debug::enable();
 
-    $server = 'mysql:host=localhost;dbname=space_truckin';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
+    $dbopts = parse_url(getenv('DATABASE_URL'));
+    $app->register(new Herrera\Pdo\PdoServiceProvider(),
+       array(
+           'pdo.dsn' => 'pgsql:dbname='.ltrim($dbopts["path"],'/').';host='.$dbopts["host"] . ';port=' . $dbopts["port"],
+           'pdo.username' => $dbopts["user"],
+           'pdo.password' => $dbopts["pass"]
+       )
+    );
+
+    // $server = 'mysql:host=localhost;dbname=space_truckin';
+    // $username = 'root';
+    // $password = 'root';
+    // $DB = new PDO($server, $username, $password);
 
     $app = new Silex\Application();
 
     $app['debug'] = true;
 
-    $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/../views'
-    ));
+    $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
 // routes start here
 
