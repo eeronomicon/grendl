@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "97e8e07adcd2e3d2806e784c83815730",
-    "content-hash": "99c7e1dc934f386267ed920b0ae08545",
+    "hash": "57e078f7e41b2f5be88248efdc57dc3d",
+    "content-hash": "100a1046545b592e58705a2254b7931f",
     "packages": [
         {
             "name": "herrera-io/pdo-log",
@@ -944,6 +944,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^5.5.12"
+    },
     "platform-dev": []
 }
