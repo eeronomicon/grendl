@@ -41,7 +41,7 @@
 
     require_once __DIR__."/../app/navigation.php";
 
-    $app->post('/new_game', function() use ($app) {
+    $app->post('new_game', function() use ($app) {
         // create a new system
         new System();
         // create a new Ship
