@@ -13,19 +13,19 @@
 
     Debug::enable();
 
-    $dbopts = parse_url(getenv('DATABASE_URL'));
-    $app->register(new Herrera\Pdo\PdoServiceProvider(),
-       array(
-           'pdo.dsn' => 'pgsql:dbname='.ltrim($dbopts["path"],'/').';host='.$dbopts["host"] . ';port=' . $dbopts["port"],
-           'pdo.username' => $dbopts["user"],
-           'pdo.password' => $dbopts["pass"]
-       )
-    );
+    // $dbopts = parse_url(getenv('DATABASE_URL'));
+    // $app->register(new Herrera\Pdo\PdoServiceProvider(),
+    //    array(
+    //        'pdo.dsn' => 'pgsql:dbname='.ltrim($dbopts["path"],'/').';host='.$dbopts["host"] . ';port=' . $dbopts["port"],
+    //        'pdo.username' => $dbopts["user"],
+    //        'pdo.password' => $dbopts["pass"]
+    //    )
+    // );
 
-    // $server = 'mysql:host=localhost;dbname=space_truckin';
-    // $username = 'root';
-    // $password = 'root';
-    // $DB = new PDO($server, $username, $password);
+    $server = 'pgsql:host=ec2-184-72-240-189.compute-1.amazonaws.com;dbname=d7rn2335aqplh5';
+    $username = 'jwxyacrgzzdvfy';
+    $password = 'Ai8q-eTZW-1SJrhdYhQKR8vlQR';
+    $DB = new PDO($server, $username, $password);
 
     $app = new Silex\Application();
 
