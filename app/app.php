@@ -14,16 +14,16 @@
     Debug::enable();
 
     // PDO MAMP
-    $server = 'mysql:host=localhost:8889;dbname=space_truckin';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
+    // $server = 'mysql:host=localhost:8889;dbname=space_truckin';
+    // $username = 'root';
+    // $password = 'root';
+    // $DB = new PDO($server, $username, $password);
 
     // PDO for Heroku
-    // $server = 'pgsql:host=ec2-184-72-240-189.compute-1.amazonaws.com;dbname=d7rn2335aqplh5';
-    // $username = 'jwxyacrgzzdvfy';
-    // $password = 'Ai8q-eTZW-1SJrhdYhQKR8vlQR';
-    // $DB = new PDO($server, $username, $password);
+    $server = 'pgsql:host=ec2-184-72-240-189.compute-1.amazonaws.com;dbname=d7rn2335aqplh5';
+    $username = 'jwxyacrgzzdvfy';
+    $password = 'Ai8q-eTZW-1SJrhdYhQKR8vlQR';
+    $DB = new PDO($server, $username, $password);
 
     $app = new Silex\Application();
 
