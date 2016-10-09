@@ -31,6 +31,8 @@ See the SPECIFICATIONS.md file.
 * _In Terminal or Command Prompt go to the /web directory and enter the command: php -S localhost:8000_
 * _To browse go to http://localhost:8000/ in the browser of your choosing_
 
+This game is also hosted on Heroku: https://shrouded-garden-90623.herokuapp.com
+
 ## Known Bugs
 _There are no known bugs with this application._
 
