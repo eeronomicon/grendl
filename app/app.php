@@ -13,19 +13,17 @@
 
     Debug::enable();
 
-    // $dbopts = parse_url(getenv('DATABASE_URL'));
-    // $app->register(new Herrera\Pdo\PdoServiceProvider(),
-    //    array(
-    //        'pdo.dsn' => 'pgsql:dbname='.ltrim($dbopts["path"],'/').';host='.$dbopts["host"] . ';port=' . $dbopts["port"],
-    //        'pdo.username' => $dbopts["user"],
-    //        'pdo.password' => $dbopts["pass"]
-    //    )
-    // );
-
-    $server = 'pgsql:host=ec2-184-72-240-189.compute-1.amazonaws.com;dbname=d7rn2335aqplh5';
-    $username = 'jwxyacrgzzdvfy';
-    $password = 'Ai8q-eTZW-1SJrhdYhQKR8vlQR';
+    // PDO MAMP
+    $server = 'mysql:host=localhost:8889;dbname=space_truckin';
+    $username = 'root';
+    $password = 'root';
     $DB = new PDO($server, $username, $password);
+
+    // PDO for Heroku
+    // $server = 'pgsql:host=ec2-184-72-240-189.compute-1.amazonaws.com;dbname=d7rn2335aqplh5';
+    // $username = 'jwxyacrgzzdvfy';
+    // $password = 'Ai8q-eTZW-1SJrhdYhQKR8vlQR';
+    // $DB = new PDO($server, $username, $password);
 
     $app = new Silex\Application();
 
@@ -33,7 +31,7 @@
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
-// routes start here
+    // routes start here
 
     $app->get("/", function() use ($app) {
         return $app['twig']->render('home.html.twig');
@@ -42,22 +40,19 @@
     require_once __DIR__."/../app/navigation.php";
 
     $app->post('/new_game', function() use ($app) {
-        // create a new system
-        new System();
+        if (!Ship::getAll()) {
+            // create a new system if no ships are in database
+            new System();
+        }
         // create a new Ship
         $name = $_POST['name'];
-        // $cargo_capacity = 100;
-        // $fuel_capacity = 100;
-        // $credits = 1000000;
-        // $location_x = 1;
-        // $location_y = 1;
-        // $current_fuel = 100;
         $parameters = System::getGameplayParameters();
-        $ship = new Ship($name, $parameters['max_cargo'], $parameters['max_fuel'], $parameters['starting_credits'], $parameters['starting_x'], $parameters['starting_y'], $parameters['starting_fuel'], $turn = 1, $id = null);
+        $ship = new Ship($name, $parameters['max_cargo'], $parameters['max_fuel'], $parameters['starting_credits'], mt_rand(1,10), mt_rand(1,10), $parameters['starting_fuel'], $turn = 1, $id = null);
         $ship->save();
         $ship->initializeCargo();
         return $app->redirect('/main_display/' . $ship->getId());
     });
+
     // main page routes
     $app->get('/main_display/{ship_id}', function($ship_id) use ($app) {
         $ship = Ship::find($ship_id);
@@ -71,6 +66,7 @@
         $ship = Ship::find($ship_id);
         $high_scores = System::getTopScores();
         $game_over_reason = $ship->checkGameover();
+        $ship->delete();
         return $app['twig']->render('gameover.html.twig', array('ship' => $ship, 'high_scores' => $high_scores, 'reason' => $game_over_reason));
     });
 
@@ -161,7 +157,6 @@
         }
         return $app->redirect('/trade/' . $ship->getId());
     });
-
 
     return $app;
 ?>

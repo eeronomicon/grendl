@@ -199,8 +199,8 @@
 
         function delete()
         {
+            $GLOBALS['DB']->exec("DELETE FROM cargo WHERE id_ship = {$this->getId()};");
             $GLOBALS['DB']->exec("DELETE FROM ship WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM cargo WHERE ship_id = {$this->getId()};");
         }
 
         function getDistance($destination_x, $destination_y)

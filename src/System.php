@@ -3,9 +3,10 @@
     {
         function __construct()
         {
-            // deletes everything from planets table
+            // deletes everything from planets table if no game in progress
             $GLOBALS['DB']->exec("DELETE FROM planets;");
             $GLOBALS['DB']->exec("DELETE FROM inventory;");
+
             // get parameters from table
             $returned_parameters = $GLOBALS['DB']->query("SELECT * FROM parameters WHERE type = 'system_setup';");
             $min_planet_density;
@@ -21,6 +22,7 @@
             $universe_size = $universe_size_sqrt * $universe_size_sqrt;
             $rando = rand($min_planet_density, $max_planet_density);
             $number_of_planets = ($rando / 100) * $universe_size;
+
             // get the appropriate number of random numbers from 1-100
             $possible_planet_locations = array();
             while (sizeof($possible_planet_locations) < $number_of_planets) {
@@ -39,6 +41,7 @@
                     }
                 }
             }
+
             // get the appropriate number of ag planets and create them
             $number_of_ag_planets = (int)$number_of_planets * ($ag_planet_share / 100);
             for($i = 0; $i < $number_of_ag_planets; $i++) {
@@ -46,6 +49,7 @@
                 // create an ag planet
                 $this->buildAgriculturalPlanet($location[0], $location[1]);
             }
+
             // for each ind planet, do the same
             $number_of_in_planets = (int)$number_of_planets * ($in_planet_share / 100);
             for($i = 0; $i < $number_of_in_planets; $i++) {
@@ -53,6 +57,7 @@
                 // create an in planet
                 $this->buildIndustrialPlanet($location[0], $location[1]);
             }
+            
             // for each fueling station, do the same
             $number_of_fuel_planets = $number_of_planets - $number_of_in_planets - $number_of_ag_planets;
             for($i = 0; $i < $number_of_fuel_planets; $i++) {

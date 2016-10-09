@@ -10,13 +10,19 @@
         <div class='container'>
             <h1 class="header-copy"><img class="header-icon" src="/img/spacetrucker2.png"> SPACE TRUCKIN <img class="header-icon" src="/img/spacetrucker.png"></h1>
             <hr>
-            <h3>Start a new game:</h3>
-            <br><br><br><br>
+            <h2>Welcome</h2>
+            <p>You are the Captain of an interstellar trading vessel.</p>
+            <p>Buy Trade Goods at lower prices at <span class="agricultural">Agricultural</span> Planets and sell them at relatively higher prices at <span class="industrial">Industrial</span> Planets. And vice-versa.</p>
+            <p>Planets with higher Populations <span class="glyphicon glyphicon-user planet-icon"></span><span class="glyphicon glyphicon-user planet-icon"></span><span class="glyphicon glyphicon-user planet-icon"></span> tend to have higher prices on and greater quantities of Trade Goods</p>
+            <p>Replenish your Fuel supply at Fueling Stations. You can't buy Fuel anywhere, so plan carefully.</p>
+            <p>You have 20 Turns to turn the most profit you can without running out of Credits or Fuel. Good luck!</p>
+            <br>
+            <h2>Start A New Game</h2>
             <form action="/new_game" method="post" id="ship_name">
-                <input class='form-control start_input' type="text" id="name" name="name" required placeholder="ENTER SHIP NAME">
+                <input class='form-control start_input' type="text" id="name" name="name" required placeholder="Name Your Ship">
             </form>
-            <br><br><br><br>
-            <button class='form-control btn btn-danger start_button' type="button" id='to_space'>To Space!</button>
+            <br>
+            <button class='form-control btn btn-danger start_button' type="button" id='to_space'>LAUNCH!</button>
             <hr>
             <h5 class="footer-copy">GRENDL: General Robotics Engineering Navigation &amp; Direction Logic</h5>
         </div>
